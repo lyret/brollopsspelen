@@ -6,7 +6,7 @@
     <p>Vi hoppas att <span data-s="du" data-p="ni">du</span> kan komma.<br>Fyll i formuläret nedan för att anmäla <span data-s="dig" data-p="er">dig</span>.</p>
   </header>
 
-  <hr class="osa-rule" />
+  {{> divider}}
 
   <form class="osa-form" action="https://formspree.io/f/xeenydqz" method="POST">
     <input type="hidden" name="_subject" value="OSA — Bröllopsspelen" />
@@ -15,7 +15,7 @@
     <!-- Deltagare -->
     <div class="osa-section">
       <label for="participants">Namn — ett per rad *</label>
-      <textarea id="participants" name="participants" placeholder="Anna Andersson" required rows="1"></textarea>
+      <textarea id="participants" name="participants" placeholder="Anna Andersson" required rows="2"></textarea>
       <p class="note">
         Ange ett namn per rad för varje person <span data-s="du" data-p="ni">du</span> anmäler.
         Tar <span data-s="du" data-p="ni">du</span> med barn, ange dem också och skriv deras ålder inom parentes — t.ex. <em>Liam Andersson (4 år)</em>.
@@ -26,7 +26,7 @@
     </div>
 
     <!-- Kontaktinformation -->
-    <hr class="osa-rule" />
+    {{> divider}}
     <div class="osa-section">
       <p class="osa-section__title">Kontaktinformation</p>
       <p class="note">Ange kontaktuppgifter till <span data-s="dig" data-p="en av er">dig</span> så att vi kan nå <span data-s="dig" data-p="er">dig</span> vid behov.</p>
@@ -41,7 +41,7 @@
     </div>
 
     <!-- Närvaro -->
-    <hr class="osa-rule" />
+    {{> divider}}
     <div class="osa-section">
       <div class="attendance">
         <button type="button" class="btn-choice btn-decline" id="btn-decline" disabled>
@@ -55,8 +55,14 @@
 
     <!-- Vilka dagar -->
     <div class="osa-section form-reveal" id="days-section">
-      <hr class="osa-rule" />
+      {{> divider}}
       <p class="osa-section__title">Vilka dagar är <span data-s="du" data-p="ni">du</span> med?</p>
+      <details class="accordion">
+        <summary>Läs mer om helgens schema...</summary>
+        <div class="accordion__body">
+          {{> info-om-helgen}}
+        </div>
+      </details>
       <p class="note">Välj alla dagar som stämmer — det hjälper oss att planera mat, boende och aktiviteter.</p>
       <div class="day-choices">
         <label class="day-choice">
@@ -85,10 +91,10 @@
 
     <!-- Boende -->
     <div class="osa-section form-reveal" id="accommodation-section">
-      <hr class="osa-rule" />
+      {{> divider}}
       <p class="osa-section__title">Boende</p>
       <details class="accordion">
-        <summary>Information om boende under helgen</summary>
+        <summary>Läs mer om möjliga boenden...</summary>
         <div class="accordion__body">
           <p>Vi har några alternativ för boende under bröllopshelgen, bland annat en härlig plats att tälta på, några vandrarhemsplatser reserverade och det finns flera hotell i Tranemo.</p>
           <p>Vänner och bekanta i byn ställer också gärna upp med sovplats.</p>
@@ -114,32 +120,32 @@
 
     <!-- Kost -->
     <div class="osa-section form-reveal" id="kost-section">
-      <hr class="osa-rule" />
+      {{> divider}}
       <p class="osa-section__title">Kost</p>
       <details class="accordion">
-        <summary>Eventuella allergier och andra kostpreferenser</summary>
+        <summary>Läs mer om mat under helgen...</summary>
         <div class="accordion__body">
           <p>All mat som serveras på bröllopet kommer vara vegetarisk 🌱 men inte nödvändigtvis vegansk, anmäl gärna om <span data-s="du" data-p="ni">du</span> önskar.</p>
         </div>
       </details>
       <div class="field">
         <label for="dietary">Allergier eller kostpreferenser</label>
-        <textarea id="dietary" name="dietary" placeholder="T.ex. glutenintolerans, veganskt…" rows="1"></textarea>
+        <textarea id="dietary" name="dietary" placeholder="T.ex. glutenintolerans, veganskt…" rows="2"></textarea>
       </div>
     </div>
 
     <!-- Något mer -->
     <div class="osa-section form-reveal" id="more-section">
-      <hr class="osa-rule" />
+      {{> divider}}
       <p class="osa-section__title">Något mer <span data-s="du" data-p="ni">du</span> vill att vi ska veta?</p>
       <div class="field">
-        <textarea name="more" placeholder="Skriv gärna vad som helst…" rows="1"></textarea>
+        <textarea name="more" placeholder="Skriv gärna vad som helst…" rows="2"></textarea>
       </div>
     </div>
 
     <!-- Skicka -->
     <div class="form-reveal" id="submit-section">
-      <hr class="osa-rule" />
+      {{> divider}}
       <button type="submit">Skicka OSA</button>
     </div>
 

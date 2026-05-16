@@ -1,16 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
 
 :root {
-  --bg:         #f7f4ef;
-  --surface:    #eeeae3;
-  --border:     #ccc5b8;
-  --text:       #1e1c1a;
-  --text-dim:   #7a7268;
-  --font:       'EB Garamond', Georgia, serif;
-  --space-sm:   0.75rem;
-  --space-md:   1.5rem;
-  --space-lg:   2.5rem;
-  --space-xl:   4rem;
+  --bg:           #f7f4ef;
+  --surface:      #eeeae3;
+  --border:       #ccc5b8;
+  --divider:      #e0dbd3;   /* structural hr/section borders — lighter */
+  --input-border: #a8a29a;   /* form input borders — darker, clearly interactive */
+  --text:         #1e1c1a;
+  --text-dim:     #7a7268;
+  --text-label:   #5c5752;   /* labels — more readable than text-dim */
+  --font:         'EB Garamond', Georgia, serif;
+  --space-sm:     0.75rem;
+  --space-md:     1.5rem;
+  --space-lg:     2.5rem;
+  --space-xl:     4rem;
 }
 
 *, *::before, *::after {
@@ -124,9 +127,10 @@ body.page-osa {
   gap: 0;
 }
 
-.osa-rule {
-  border: none;
-  border-top: 1px solid var(--border);
+.divider {
+  display: block;
+  width: 100%;
+  color: var(--input-border);
   margin: var(--space-lg) 0;
 }
 
@@ -137,8 +141,8 @@ body.page-osa {
 }
 
 .osa-section__title {
-  font-size: 1.1rem;
-  font-weight: 400;
+  font-size: 1.15rem;
+  font-weight: 500;
   color: var(--text);
   line-height: 1.4;
 }
@@ -155,17 +159,16 @@ body.page-osa {
 }
 
 label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: var(--text-label);
 }
 
 .note {
-  font-size: 0.85rem;
-  font-style: italic;
-  color: var(--text-dim);
-  line-height: 1.6;
+  font-size: 1.1rem;
+  color: var(--text-label);
+  line-height: 1.75;
 }
 
 input[type="tel"],
@@ -173,17 +176,16 @@ input[type="email"] {
   font-family: var(--font);
   font-size: 1rem;
   color: var(--text);
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--border);
+  background: rgba(30, 28, 26, 0.025);
+  border: 1px solid var(--input-border);
   border-radius: 0;
   outline: none;
-  padding: 0.4rem 0;
+  padding: 0.55rem 0.75rem;
   width: 100%;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, background 0.15s;
 }
 
-input:focus { border-bottom-color: var(--text); }
+input:focus { border-color: var(--text); background: rgba(30, 28, 26, 0.04); }
 input::placeholder { color: var(--border); font-style: italic; }
 
 input:-webkit-autofill,
@@ -196,21 +198,21 @@ textarea {
   font-family: var(--font);
   font-size: 1rem;
   color: var(--text);
-  background: transparent;
-  border: 1px solid var(--border);
+  background: rgba(30, 28, 26, 0.025);
+  border: 1px solid var(--input-border);
   border-radius: 0;
   outline: none;
-  padding: 0.5rem 0.6rem;
+  padding: 0.55rem 0.75rem;
   width: 100%;
   line-height: 1.8;
   resize: none;
   overflow: hidden;
-  min-height: 2.8rem;
-  transition: border-color 0.15s;
+  min-height: 4.7rem;
+  transition: border-color 0.15s, background 0.15s;
 }
 
 textarea::placeholder { color: var(--border); font-style: italic; }
-textarea:focus { border-color: var(--text); }
+textarea:focus { border-color: var(--text); background: rgba(30, 28, 26, 0.04); }
 
 /* Attendance buttons */
 .attendance {
@@ -261,12 +263,14 @@ textarea:focus { border-color: var(--text); }
   gap: 0.75rem;
   padding: 0.75rem;
   border: 1px solid var(--border);
+  background: rgba(238, 234, 227, 0.45);
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
 }
 
 .day-choice:hover {
   border-color: var(--text-dim);
+  background: var(--surface);
 }
 
 .day-choice input[type="checkbox"] {
@@ -338,12 +342,13 @@ textarea:focus { border-color: var(--text); }
   gap: 0.75rem;
   padding: 0.75rem;
   border: 1px solid var(--border);
+  background: rgba(238, 234, 227, 0.45);
   cursor: pointer;
   font-size: 1rem;
   transition: border-color 0.15s, background 0.15s;
 }
 
-.radio-choice:hover { border-color: var(--text-dim); }
+.radio-choice:hover { border-color: var(--text-dim); background: var(--surface); }
 
 .radio-choice input[type="radio"] {
   appearance: none;
@@ -392,34 +397,36 @@ textarea:focus { border-color: var(--text); }
 
 button[type="submit"] {
   font-family: var(--font);
-  font-size: 0.9rem;
-  letter-spacing: 0.18em;
+  font-size: 1rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--bg);
   background: var(--text);
-  border: none;
-  padding: 0.85rem 2rem;
+  border: 1px solid var(--text);
+  outline: 1px solid var(--text);
+  outline-offset: 4px;
+  padding: 1.2rem;
   cursor: pointer;
-  align-self: flex-start;
-  transition: opacity 0.15s;
+  width: 100%;
+  transition: opacity 0.2s;
   margin-top: var(--space-sm);
 }
 
-button[type="submit"]:hover { opacity: 0.75; }
+button[type="submit"]:hover { opacity: 0.8; }
 
 /* ============================================================
    Accordion
    ============================================================ */
 
 .accordion {
-  border-top: 1px solid var(--border);
-  padding-top: 0;
+  border: 1px solid var(--divider);
+  background: rgba(238, 234, 227, 0.5);
 }
 
 .accordion summary {
   list-style: none;
   cursor: pointer;
-  padding: var(--space-sm) 0;
+  padding: 0.6rem var(--space-sm);
   font-size: 0.8rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -427,6 +434,7 @@ button[type="submit"]:hover { opacity: 0.75; }
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0.75rem;
   user-select: none;
   transition: color 0.15s;
 }
@@ -434,18 +442,32 @@ button[type="submit"]:hover { opacity: 0.75; }
 .accordion summary::-webkit-details-marker { display: none; }
 
 .accordion summary::after {
-  content: '+';
-  font-size: 1.1rem;
-  font-weight: 300;
-  line-height: 1;
+  content: '';
+  display: block;
+  width: 1.1rem;
+  height: 0.55rem;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,<svg viewBox='0 0 16 8' xmlns='http://www.w3.org/2000/svg'><path d='M2,2 Q8,8 14,2' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round'/><circle cx='8' cy='5' r='1.2' fill='black'/></svg>");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  mask-image: url("data:image/svg+xml,<svg viewBox='0 0 16 8' xmlns='http://www.w3.org/2000/svg'><path d='M2,2 Q8,8 14,2' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round'/><circle cx='8' cy='5' r='1.2' fill='black'/></svg>");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  transition: transform 0.25s;
 }
 
-.accordion[open] summary::after { content: '−'; }
+.accordion[open] summary::after {
+  transform: rotate(180deg);
+}
 
 .accordion summary:hover { color: var(--text); }
 
 .accordion__body {
-  padding-bottom: var(--space-md);
+  padding: 0 var(--space-sm) var(--space-md);
+  border-top: 1px solid var(--divider);
   font-size: 0.95rem;
   line-height: 1.75;
 }
@@ -501,7 +523,7 @@ button[type="submit"]:hover { opacity: 0.75; }
 .info-nav__rule {
   width: 100%;
   border: none;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--divider);
   margin: 0.3rem 0;
 }
 
@@ -551,7 +573,7 @@ button[type="submit"]:hover { opacity: 0.75; }
     height: 100%;
     width: 200px;
     background: var(--bg);
-    border-left: 1px solid var(--border);
+    border-left: 1px solid var(--divider);
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
@@ -613,7 +635,7 @@ button[type="submit"]:hover { opacity: 0.75; }
 .info-header {
   margin-bottom: var(--space-lg);
   padding-bottom: var(--space-md);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--divider);
 }
 
 .info-header h1 {
@@ -632,7 +654,7 @@ button[type="submit"]:hover { opacity: 0.75; }
 .info-section {
   margin-bottom: var(--space-lg);
   padding-bottom: var(--space-lg);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--divider);
 }
 
 .info-section:last-child {
