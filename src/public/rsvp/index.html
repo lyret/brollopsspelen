@@ -4,495 +4,255 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OSA — Bröllopsspelen</title>
-
-  <!-- Google Fonts preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <!-- Shared design tokens -->
   <link rel="stylesheet" href="/style.css" />
-
   <style>
-    /* ============================================================
-       RSVP page — standalone medieval form styles
-       ============================================================ */
-
-    /* Page scaffold */
     body {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      background-color: var(--color-bg);
-      /* Faint parchment texture via noise-like radial gradients */
-      background-image:
-        radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(201, 144, 58, 0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(201, 144, 58, 0.04) 0%, transparent 70%);
       padding: var(--space-xl) var(--space-md);
     }
 
-    /* ── Back link ───────────────────────────────────────────── */
-    .rsvp-back {
+    .back {
       align-self: flex-start;
-      margin-bottom: var(--space-lg);
-      font-family: var(--font-body);
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      color: var(--color-parchment-dim);
+      font-size: 0.9rem;
+      color: var(--text-dim);
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4em;
-      transition: color 0.2s ease;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-lg);
     }
 
-    .rsvp-back:hover {
-      color: var(--color-gold);
+    .back:hover {
+      color: var(--text);
     }
 
-    .rsvp-back::before {
-      content: '←';
-      font-style: normal;
-    }
-
-    /* ── Form container ──────────────────────────────────────── */
-    .rsvp-container {
+    .wrap {
       width: 100%;
-      max-width: 560px;
-      position: relative;
+      max-width: 520px;
     }
 
-    /* Ornamental top border — double rule with gold pip */
-    .rsvp-container::before,
-    .rsvp-container::after {
-      content: '';
-      display: block;
-      height: 1px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        var(--color-gold-dim) 20%,
-        var(--color-gold) 50%,
-        var(--color-gold-dim) 80%,
-        transparent
-      );
-    }
-
-    .rsvp-container::before {
-      margin-bottom: var(--space-xl);
-    }
-
-    .rsvp-container::after {
-      margin-top: var(--space-xl);
-    }
-
-    /* ── Header ──────────────────────────────────────────────── */
-    .rsvp-header {
+    header {
       text-align: center;
-      margin-bottom: var(--space-xl);
+      margin-bottom: var(--space-lg);
     }
 
-    .rsvp-header__names {
-      font-family: var(--font-display);
-      font-size: clamp(1.4rem, 5vw, 2rem);
+    h1 {
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
       font-weight: 400;
-      color: var(--color-gold-bright);
-      letter-spacing: 0.06em;
-      line-height: 1.2;
-      /* Faint text-shadow for candlelight warmth */
-      text-shadow:
-        0 0 40px rgba(201, 144, 58, 0.45),
-        0 0 80px rgba(201, 144, 58, 0.18);
-      margin-bottom: var(--space-md);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
     }
 
-    /* Ornamental divider under the names */
-    .rsvp-header__ornament {
-      display: block;
-      text-align: center;
-      color: var(--color-gold-dim);
-      font-size: 1.1rem;
-      letter-spacing: 0.5em;
-      margin: var(--space-sm) 0 var(--space-md);
-      user-select: none;
-    }
-
-    .rsvp-header__intro {
-      font-family: var(--font-body);
+    header p {
       font-style: italic;
+      color: var(--text-dim);
       font-size: 1rem;
-      line-height: 1.75;
-      color: var(--color-parchment);
-      max-width: 440px;
-      margin: 0 auto;
+      line-height: 1.7;
     }
 
-    /* ── Section divider ─────────────────────────────────────── */
-    .rsvp-divider {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
       margin: var(--space-lg) 0;
-      color: var(--color-parchment-faint);
-      font-size: 0.8rem;
-      letter-spacing: 0.3em;
     }
 
-    .rsvp-divider::before,
-    .rsvp-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        var(--color-parchment-faint)
-      );
-    }
-
-    .rsvp-divider::after {
-      background: linear-gradient(
-        to left,
-        transparent,
-        var(--color-parchment-faint)
-      );
-    }
-
-    /* ── Form fields ─────────────────────────────────────────── */
-    .rsvp-form {
+    form {
       display: flex;
       flex-direction: column;
-      gap: var(--space-lg);
+      gap: var(--space-md);
     }
 
     .field {
       display: flex;
       flex-direction: column;
-      gap: var(--space-xs);
+      gap: 0.4rem;
     }
 
-    .field__label {
-      font-family: var(--font-body);
-      font-variant: small-caps;
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
-      color: var(--color-parchment-dim);
-      text-transform: lowercase; /* combined with small-caps gives true small-caps feel */
+    label {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
     }
 
-    .field__label--required::after {
-      content: ' *';
-      color: var(--color-gold-dim);
-    }
-
-    .field__input {
-      font-family: var(--font-body);
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea {
+      font-family: var(--font);
       font-size: 1rem;
-      color: var(--color-parchment);
+      color: var(--text);
       background: transparent;
       border: none;
-      border-bottom: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--border);
       border-radius: 0;
       outline: none;
-      padding: var(--space-xs) 0;
+      padding: 0.4rem 0;
       width: 100%;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      -webkit-appearance: none;
-      appearance: none;
-      caret-color: var(--color-gold);
+      transition: border-color 0.15s;
     }
 
-    .field__input::placeholder {
-      color: var(--color-parchment-faint);
+    input:focus,
+    textarea:focus {
+      border-bottom-color: var(--text);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--border);
       font-style: italic;
     }
 
-    .field__input:focus {
-      border-bottom-color: var(--color-gold);
-      box-shadow: 0 2px 0 -1px rgba(201, 144, 58, 0.35);
+    input:-webkit-autofill,
+    input:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0 1000px var(--bg) inset;
+      -webkit-text-fill-color: var(--text);
     }
 
-    /* Autofill override — browsers tend to smash white backgrounds in */
-    .field__input:-webkit-autofill,
-    .field__input:-webkit-autofill:focus {
-      -webkit-box-shadow: 0 0 0 1000px var(--color-surface-mid) inset;
-      -webkit-text-fill-color: var(--color-parchment);
-      caret-color: var(--color-gold);
-      transition: background-color 0s 9999s; /* delay the autofill flash */
-    }
-
-    textarea.field__input {
+    textarea {
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.6rem;
       resize: vertical;
-      min-height: 90px;
-      line-height: 1.65;
-      border: 1px solid var(--color-border);
-      border-radius: 2px;
-      padding: var(--space-xs) var(--space-sm);
-      background: rgba(255, 255, 255, 0.025);
+      min-height: 80px;
+      line-height: 1.6;
     }
 
-    textarea.field__input:focus {
-      border-color: var(--color-gold);
-      box-shadow: 0 0 0 1px rgba(201, 144, 58, 0.18);
+    textarea:focus {
+      border-color: var(--text);
     }
 
-    /* ── Checkbox ────────────────────────────────────────────── */
-    .field--checkbox {
+    .field--check {
       flex-direction: row;
       align-items: flex-start;
-      gap: var(--space-sm);
+      gap: 0.6rem;
       cursor: pointer;
     }
 
-    .field--checkbox input[type="checkbox"] {
+    .field--check input[type="checkbox"] {
       appearance: none;
       -webkit-appearance: none;
-      width: 1.1rem;
-      height: 1.1rem;
-      min-width: 1.1rem;
-      border: 1px solid var(--color-border);
+      width: 1rem;
+      height: 1rem;
+      min-width: 1rem;
+      border: 1px solid var(--border);
       background: transparent;
       cursor: pointer;
       position: relative;
-      top: 0.15em;
-      transition: border-color 0.2s ease, background 0.2s ease;
+      top: 0.25em;
+      transition: border-color 0.15s, background 0.15s;
     }
 
-    .field--checkbox input[type="checkbox"]:checked {
-      background: var(--color-gold-dim);
-      border-color: var(--color-gold);
+    .field--check input[type="checkbox"]:checked {
+      background: var(--text);
+      border-color: var(--text);
     }
 
-    .field--checkbox input[type="checkbox"]:checked::after {
-      content: '✦';
+    .field--check input[type="checkbox"]:checked::after {
+      content: '';
+      display: block;
+      width: 0.3rem;
+      height: 0.55rem;
+      border: 2px solid var(--bg);
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg) translate(1px, -1px);
+      margin: auto;
       position: absolute;
       inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.55rem;
-      color: var(--color-gold-bright);
-      line-height: 1.1rem;
-      text-align: center;
-      width: 100%;
     }
 
-    .field--checkbox:hover input[type="checkbox"] {
-      border-color: var(--color-gold-dim);
-    }
-
-    .field--checkbox .field__checkbox-label {
-      font-family: var(--font-body);
-      font-size: 0.92rem;
-      color: var(--color-parchment);
-      line-height: 1.5;
+    .field--check label {
+      font-size: 0.95rem;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--text);
       cursor: pointer;
-      user-select: none;
     }
 
-    /* ── Conditional extra-guests block ─────────────────────── */
-    .field--conditional {
+    #extra-guests {
       display: none;
-      flex-direction: column;
-      gap: var(--space-xs);
-      padding-left: var(--space-md);
-      border-left: 2px solid var(--color-parchment-faint);
-      margin-top: calc(-1 * var(--space-sm));
     }
 
-    .field--conditional.is-visible {
-      display: flex;
-    }
-
-    .field__note {
-      font-family: var(--font-body);
-      font-style: italic;
-      font-size: 0.82rem;
-      color: var(--color-parchment-dim);
-      line-height: 1.55;
-      margin-top: var(--space-xs);
-    }
-
-    /* ── Submit button ───────────────────────────────────────── */
-    .rsvp-submit {
-      display: block;
-      width: 100%;
-      margin-top: var(--space-sm);
-      padding: 1rem 2rem;
-      background: var(--color-gold);
-      color: var(--color-ink);
-      font-family: var(--font-display);
+    .note {
       font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.26em;
+      font-style: italic;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    button[type="submit"] {
+      font-family: var(--font);
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      border: 1px solid var(--color-gold);
-      border-radius: 1px;
+      color: var(--bg);
+      background: var(--text);
+      border: none;
+      padding: 0.85rem 2rem;
       cursor: pointer;
-      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-      box-shadow: 0 0 22px rgba(201, 144, 58, 0.18);
+      align-self: flex-start;
+      transition: opacity 0.15s;
+      margin-top: var(--space-sm);
     }
 
-    .rsvp-submit:hover {
-      background: var(--color-gold-bright);
-      border-color: var(--color-gold-bright);
-      box-shadow: 0 0 32px rgba(224, 168, 74, 0.32);
-    }
-
-    .rsvp-submit:active {
-      background: var(--color-gold-dim);
-      border-color: var(--color-gold-dim);
-      box-shadow: none;
-    }
-
-    /* ── Responsive ──────────────────────────────────────────── */
-    @media (max-width: 600px) {
-      body {
-        padding: var(--space-lg) var(--space-md);
-      }
-
-      .rsvp-back {
-        margin-bottom: var(--space-md);
-      }
-
-      .rsvp-header__names {
-        font-size: 1.4rem;
-      }
+    button[type="submit"]:hover {
+      opacity: 0.75;
     }
   </style>
 </head>
 <body>
+  <a class="back" href="/">← Tillbaka</a>
 
-  <a class="rsvp-back" href="/">Tillbaka</a>
-
-  <div class="rsvp-container">
-
-    <!-- Header -->
-    <header class="rsvp-header">
-      <h1 class="rsvp-header__names">Katrin Vinge &amp; Viktor</h1>
-      <span class="rsvp-header__ornament" aria-hidden="true">✦ ✦ ✦</span>
-      <p class="rsvp-header__intro">
-        Vi är glada att kunna bjuda in dig till vår fest och hoppas att du
-        vill fira med oss. Fyll i formuläret nedan för att anmäla dig.
-      </p>
+  <div class="wrap">
+    <header>
+      <h1>Katrin & Viktor</h1>
+      <p>Vi hoppas att du kan komma.<br>Fyll i formuläret nedan för att anmäla dig.</p>
     </header>
 
-    <!-- Form -->
-    <form
-      class="rsvp-form"
-      action="https://formspree.io/f/xeenydqz"
-      method="POST"
-    >
-      <!-- Hidden Formspree fields -->
+    <hr />
+
+    <form action="https://formspree.io/f/xeenydqz" method="POST">
       <input type="hidden" name="_subject" value="OSA — Bröllopsspelen" />
 
-      <!-- Ditt namn -->
       <div class="field">
-        <label class="field__label field__label--required" for="name">
-          Ditt namn
-        </label>
-        <input
-          class="field__input"
-          type="text"
-          id="name"
-          name="name"
-          required
-          autocomplete="name"
-          placeholder="Förnamn Efternamn"
-        />
+        <label for="name">Ditt namn *</label>
+        <input type="text" id="name" name="name" required autocomplete="name" />
       </div>
 
-      <!-- Telefonnummer -->
       <div class="field">
-        <label class="field__label field__label--required" for="phone">
-          Telefonnummer
-        </label>
-        <input
-          class="field__input"
-          type="tel"
-          id="phone"
-          name="phone"
-          required
-          autocomplete="tel"
-          placeholder="+46 70 000 00 00"
-        />
+        <label for="phone">Telefonnummer *</label>
+        <input type="tel" id="phone" name="phone" required autocomplete="tel" />
       </div>
 
-      <!-- E-postadress -->
       <div class="field">
-        <label class="field__label" for="email">
-          E-postadress
-        </label>
-        <input
-          class="field__input"
-          type="email"
-          id="email"
-          name="email"
-          autocomplete="email"
-          placeholder="din@epost.se"
-        />
+        <label for="email">E-postadress</label>
+        <input type="email" id="email" name="email" autocomplete="email" />
       </div>
 
-      <div class="rsvp-divider" aria-hidden="true">✦</div>
+      <hr />
 
-      <!-- Checkbox — extra guests -->
-      <label class="field field--checkbox" for="extra-guests-toggle">
-        <input
-          type="checkbox"
-          id="extra-guests-toggle"
-          name="extra_guests_flag"
-          value="ja"
-        />
-        <span class="field__checkbox-label">
-          Jag anmäler flera personer och/eller barn
-        </span>
+      <label class="field--check">
+        <input type="checkbox" id="multiple" name="multiple" />
+        <span>Jag anmäler flera personer och/eller barn</span>
       </label>
 
-      <!-- Conditional — extra guests textarea -->
-      <div class="field field--conditional" id="extra-guests-field">
-        <label class="field__label" for="extra-guests">
-          Övriga gäster
-        </label>
-        <textarea
-          class="field__input"
-          id="extra-guests"
-          name="extra_guests"
-          rows="4"
-          placeholder="Ange namn på övriga gäster, ett per rad…"
-        ></textarea>
-        <p class="field__note">
-          Om du önskar ta med en +1 som inte är inbjuden, hör av dig till oss.
-        </p>
+      <div class="field" id="extra-guests">
+        <label for="guests">Övriga gäster</label>
+        <textarea id="guests" name="guests" placeholder="Ett namn per rad"></textarea>
+        <p class="note">Om du önskar ta med en +1 som inte är inbjuden, hör av dig till oss istället.</p>
       </div>
 
-      <!-- Submit -->
-      <button type="submit" class="rsvp-submit">Skicka OSA</button>
-
+      <button type="submit">Skicka OSA</button>
     </form>
-
-  </div><!-- /.rsvp-container -->
+  </div>
 
   <script>
-    // Show/hide the extra-guests textarea based on checkbox state
-    (function () {
-      var checkbox = document.getElementById('extra-guests-toggle');
-      var conditional = document.getElementById('extra-guests-field');
-      var textarea = document.getElementById('extra-guests');
-
-      function sync() {
-        if (checkbox.checked) {
-          conditional.classList.add('is-visible');
-        } else {
-          conditional.classList.remove('is-visible');
-          textarea.value = '';
-        }
-      }
-
-      checkbox.addEventListener('change', sync);
-      sync(); // initialise on load
-    }());
+    document.getElementById('multiple').addEventListener('change', function () {
+      document.getElementById('extra-guests').style.display = this.checked ? 'flex' : 'none';
+    });
   </script>
-
 </body>
 </html>
