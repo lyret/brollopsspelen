@@ -41,6 +41,36 @@
       </div>
     </div>
 
+    <!-- Vilka dagar -->
+    <div class="osa-section form-reveal" id="days-section">
+      <hr style="margin:0 0 var(--space-md)" />
+      <h2>Vilka dagar är <span data-s="du" data-p="ni">du</span> med?</h2>
+      <p class="note">Välj alla dagar som stämmer — det hjälper oss att planera mat, boende och aktiviteter.</p>
+      <div class="day-choices">
+        <label class="day-choice">
+          <input type="checkbox" name="days" value="fredag" />
+          <div class="day-choice__body">
+            <strong>Fredag</strong>
+            <span>Är med på fix, förfest och prepp med grillning.</span>
+          </div>
+        </label>
+        <label class="day-choice">
+          <input type="checkbox" name="days" value="lordag" />
+          <div class="day-choice__body">
+            <strong>Lördag</strong>
+            <span>Bröllopsdagen pågår från förmiddagen till sent på natten.</span>
+          </div>
+        </label>
+        <label class="day-choice">
+          <input type="checkbox" name="days" value="sondag" />
+          <div class="day-choice__body">
+            <strong>Söndag</strong>
+            <span>Brunch och strike.</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
     <!-- Kontaktinformation -->
     <div class="osa-section form-reveal" id="contact-section">
       <hr style="margin:0 0 var(--space-md)" />
@@ -71,12 +101,14 @@
   const btnDecline = document.getElementById('btn-decline');
   const btnAttend = document.getElementById('btn-attend');
   const contactSection = document.getElementById('contact-section');
+  const daysSection = document.getElementById('days-section');
   let participantCount = 0;
 
   const dev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
   if (dev) {
     btnDecline.disabled = false;
     btnAttend.disabled = false;
+    daysSection.classList.add('is-visible');
     contactSection.classList.add('is-visible');
   }
 
@@ -101,10 +133,13 @@
 
   function selectAttendance(value) {
     attendanceInput.value = value;
-    btnDecline.classList.toggle('is-selected', value === 'nej');
-    btnAttend.classList.toggle('is-selected', value === 'ja');
+    const attending = value === 'ja';
+    btnDecline.classList.toggle('is-selected', !attending);
+    btnAttend.classList.toggle('is-selected', attending);
+    daysSection.classList.toggle('is-visible', attending);
     contactSection.classList.add('is-visible');
-    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const scrollTarget = attending ? daysSection : contactSection;
+    scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   btnDecline.addEventListener('click', function() { selectAttendance('nej'); });
