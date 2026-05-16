@@ -1,3 +1,43 @@
+/* ============================================================
+   Bröllopsspelen — Global Stylesheet
+   Aesthetic: Dark medieval, Scandinavian, candlelight warmth
+   Inspired by "The Name of the Rose" (1986)
+   ============================================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English:ital@0;1&display=swap');
+
+/* --- Design Tokens --- */
+:root {
+  /* Colour palette */
+  --color-bg:           #09070a;       /* near-black, warm undertone        */
+  --color-surface:      #110e12;       /* lifted surface for cards/panels   */
+  --color-surface-mid:  #1a151c;       /* slightly lighter surface           */
+  --color-border:       #2e2230;       /* subtle border, muted plum          */
+
+  --color-parchment:    #d4b896;       /* aged parchment — main text         */
+  --color-parchment-dim:#8a7060;       /* dimmed parchment — labels, hints   */
+  --color-parchment-faint: #4a3a2e;   /* very faint — decorative lines      */
+
+  --color-gold:         #c9903a;       /* amber/dark gold — primary accent   */
+  --color-gold-bright:  #e0a84a;       /* brighter gold for hover/focus      */
+  --color-gold-dim:     #7a5520;       /* muted gold for inactive states     */
+
+  --color-ink:          #1e1520;       /* deep ink — button text on gold bg  */
+
+  /* Typography */
+  --font-display: 'Cinzel Decorative', 'Palatino Linotype', Palatino, serif;
+  --font-body:    'IM Fell English', 'Palatino Linotype', Palatino, Georgia, serif;
+
+  /* Spacing */
+  --space-xs:  0.375rem;
+  --space-sm:  0.75rem;
+  --space-md:  1.25rem;
+  --space-lg:  2rem;
+  --space-xl:  3rem;
+}
+
+/* --- Reset --- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -9,10 +49,16 @@ html, body {
 }
 
 body {
-  font-family: serif;
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-parchment);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Hero */
+/* ============================================================
+   Hero Section
+   ============================================================ */
+
 .hero {
   position: relative;
   width: 100%;
@@ -31,23 +77,42 @@ body {
   object-position: center;
 }
 
+/* Subtle dark vignette over the background image */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 30%,
+    rgba(9, 7, 10, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
 .hero__btn {
   position: relative;
   z-index: 1;
   display: inline-block;
-  padding: 1rem 2.5rem;
-  background: rgba(255, 255, 255, 0.85);
-  color: #222;
+  padding: 0.9rem 2.8rem;
+  background: rgba(9, 7, 10, 0.62);
+  color: var(--color-gold-bright);
   text-decoration: none;
-  font-family: serif;
-  font-size: 1.1rem;
-  letter-spacing: 0.15em;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(4px);
-  transition: background 0.2s;
+  border: 1px solid rgba(201, 144, 58, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  /* Subtle glow */
+  box-shadow: 0 0 18px rgba(201, 144, 58, 0.12), inset 0 0 12px rgba(201, 144, 58, 0.04);
 }
 
 .hero__btn:hover {
-  background: rgba(255, 255, 255, 1);
+  background: rgba(201, 144, 58, 0.18);
+  border-color: rgba(224, 168, 74, 0.85);
+  color: var(--color-gold-bright);
+  box-shadow: 0 0 28px rgba(201, 144, 58, 0.22), inset 0 0 16px rgba(201, 144, 58, 0.08);
 }
