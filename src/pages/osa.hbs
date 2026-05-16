@@ -112,6 +112,31 @@
       </div>
     </div>
 
+    <!-- Kost -->
+    <div class="osa-section form-reveal" id="kost-section">
+      <hr class="osa-rule" />
+      <p class="osa-section__title">Kost</p>
+      <details class="accordion">
+        <summary>Eventuella allergier och andra kostpreferenser</summary>
+        <div class="accordion__body">
+          <p>All mat som serveras på bröllopet kommer vara vegetarisk 🌱 men inte nödvändigtvis vegansk, anmäl gärna om <span data-s="du" data-p="ni">du</span> önskar.</p>
+        </div>
+      </details>
+      <div class="field">
+        <label for="dietary">Allergier eller kostpreferenser</label>
+        <textarea id="dietary" name="dietary" placeholder="T.ex. glutenintolerans, veganskt…" rows="1"></textarea>
+      </div>
+    </div>
+
+    <!-- Något mer -->
+    <div class="osa-section form-reveal" id="more-section">
+      <hr class="osa-rule" />
+      <p class="osa-section__title">Något mer <span data-s="du" data-p="ni">du</span> vill att vi ska veta?</p>
+      <div class="field">
+        <textarea name="more" placeholder="Skriv gärna vad som helst…" rows="1"></textarea>
+      </div>
+    </div>
+
     <!-- Skicka -->
     <div class="form-reveal" id="submit-section">
       <hr class="osa-rule" />
@@ -129,6 +154,8 @@
   const btnAttend = document.getElementById('btn-attend');
   const daysSection = document.getElementById('days-section');
   const accommodationSection = document.getElementById('accommodation-section');
+  const kostSection = document.getElementById('kost-section');
+  const moreSection = document.getElementById('more-section');
   const submitSection = document.getElementById('submit-section');
   let participantCount = 0;
 
@@ -138,6 +165,8 @@
     btnAttend.disabled = false;
     daysSection.classList.add('is-visible');
     accommodationSection.classList.add('is-visible');
+    kostSection.classList.add('is-visible');
+    moreSection.classList.add('is-visible');
     submitSection.classList.add('is-visible');
   }
 
@@ -167,6 +196,8 @@
     btnAttend.classList.toggle('is-selected', attending);
     daysSection.classList.toggle('is-visible', attending);
     accommodationSection.classList.toggle('is-visible', attending);
+    kostSection.classList.toggle('is-visible', attending);
+    moreSection.classList.add('is-visible');
     submitSection.classList.add('is-visible');
     const scrollTarget = attending ? daysSection : submitSection;
     scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -175,4 +206,11 @@
   btnDecline.addEventListener('click', function() { selectAttendance('nej'); });
   btnAttend.addEventListener('click', function() { selectAttendance('ja'); });
   textarea.addEventListener('input', update);
+
+  document.querySelectorAll('textarea:not(#participants)').forEach(function(ta) {
+    ta.addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = this.scrollHeight + 'px';
+    });
+  });
 </script>
