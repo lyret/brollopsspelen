@@ -63,6 +63,15 @@
       gap: var(--space-md);
     }
 
+    h2 {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: var(--space-sm);
+    }
+
     .field {
       display: flex;
       flex-direction: column;
@@ -76,7 +85,6 @@
       color: var(--text-dim);
     }
 
-    input[type="text"],
     input[type="tel"],
     input[type="email"] {
       font-family: var(--font);
@@ -93,7 +101,6 @@
     }
 
     input:focus { border-bottom-color: var(--text); }
-
     input::placeholder { color: var(--border); font-style: italic; }
 
     input:-webkit-autofill,
@@ -126,7 +133,56 @@
       font-size: 0.85rem;
       font-style: italic;
       color: var(--text-dim);
-      line-height: 1.5;
+      line-height: 1.6;
+    }
+
+    /* Attendance buttons */
+    .attendance {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .btn-choice {
+      font-family: var(--font);
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+      border: 1px solid transparent;
+      padding: 0.85rem 1.25rem;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      transition: opacity 0.15s, outline 0.1s;
+      opacity: 0.88;
+    }
+
+    .btn-choice:hover { opacity: 1; }
+
+    .btn-decline {
+      background: #7a2020;
+      color: #f5ede8;
+    }
+
+    .btn-attend {
+      background: #2a5c38;
+      color: #e8f0ea;
+    }
+
+    .btn-choice.is-selected {
+      opacity: 1;
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
+    }
+
+    /* Revealed sections */
+    .form-reveal {
+      display: none;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .form-reveal.is-visible {
+      display: flex;
     }
 
     button[type="submit"] {
@@ -160,45 +216,87 @@
 
     <form action="https://formspree.io/f/xeenydqz" method="POST">
       <input type="hidden" name="_subject" value="OSA — Bröllopsspelen" />
+      <input type="hidden" name="attendance" id="attendance-input" value="" />
 
-      <div class="field">
-        <label for="participants">Deltagare — ett namn per rad *</label>
-        <textarea id="participants" name="participants" placeholder="Anna Andersson" required rows="1"></textarea>
-        <p class="note">Ange ett namn per rad. Tar <span data-s="du" data-p="ni">du</span> med barn, ange dem också — och skriv deras ålder inom parentes, t.ex. <em>Liam Andersson (4 år)</em>.</p>
-        <p class="note" id="participants-note" style="display:none">Om <span data-s="du" data-p="någon av er">du</span> önskar ta med en +1 som inte är inbjuden, hör av dig till oss.</p>
+      <!-- Step 1: Deltagare -->
+      <div>
+        <h2>Deltagare</h2>
+        <div class="field">
+          <label for="participants">Namn — ett per rad *</label>
+          <textarea id="participants" name="participants" placeholder="Anna Andersson" required rows="1"></textarea>
+          <p class="note">
+            Ange ett namn per rad för varje person <span data-s="du" data-p="ni">du</span> anmäler.
+            Tar <span data-s="du" data-p="ni">du</span> med barn, ange dem också och skriv deras ålder inom parentes — t.ex. <em>Liam Andersson (4 år)</em>.
+          </p>
+          <p class="note" id="plus-one-note" style="display:none">
+            Om <span data-s="du" data-p="någon av er">du</span> önskar ta med en +1 som inte är inbjuden, hör av dig till oss innan du anmäler.
+          </p>
+        </div>
       </div>
 
-      <hr />
-
-      <div class="field">
-        <label for="phone">Telefonnummer *</label>
-        <input type="tel" id="phone" name="phone" required autocomplete="tel" />
+      <!-- Step 2: Attendance choice -->
+      <div class="form-reveal" id="attendance-section">
+        <hr style="margin:0" />
+        <div class="attendance">
+          <button type="button" class="btn-choice btn-decline" id="btn-decline">
+            <span data-s="Jag" data-p="Vi">Jag</span> kan tyvärr ej närvara
+          </button>
+          <button type="button" class="btn-choice btn-attend" id="btn-attend">
+            <span data-s="Jag" data-p="Vi">Jag</span> kommer
+          </button>
+        </div>
       </div>
 
-      <div class="field">
-        <label for="email">E-postadress</label>
-        <input type="email" id="email" name="email" autocomplete="email" />
+      <!-- Step 3: Kontaktinformation -->
+      <div class="form-reveal" id="contact-section">
+        <hr style="margin:0" />
+        <div>
+          <h2>Kontaktinformation</h2>
+          <p class="note" style="margin-bottom: var(--space-md)">
+            Ange kontaktuppgifter till <span data-s="dig" data-p="en av er">dig</span> så att vi kan nå <span data-s="dig" data-p="er">dig</span> vid behov och skicka bekräftelse.
+          </p>
+          <div class="field" style="gap: var(--space-md)">
+            <div class="field">
+              <label for="phone">Telefonnummer *</label>
+              <input type="tel" id="phone" name="phone" required autocomplete="tel" />
+            </div>
+            <div class="field">
+              <label for="email">E-postadress</label>
+              <input type="email" id="email" name="email" autocomplete="email" />
+              <p class="note">Används för att skicka en bekräftelse på <span data-s="din" data-p="er">din</span> anmälan.</p>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit">Skicka OSA</button>
       </div>
 
-      <button type="submit">Skicka OSA</button>
     </form>
   </div>
 
   <script>
     const textarea = document.getElementById('participants');
-    const note = document.getElementById('participants-note');
+    const plusOneNote = document.getElementById('plus-one-note');
+    const attendanceSection = document.getElementById('attendance-section');
+    const contactSection = document.getElementById('contact-section');
+    const attendanceInput = document.getElementById('attendance-input');
+    const btnDecline = document.getElementById('btn-decline');
+    const btnAttend = document.getElementById('btn-attend');
     let participantCount = 0;
 
     function update() {
       const lines = textarea.value.split('\n').filter(function(l) { return l.trim().length > 0; });
       participantCount = lines.length;
 
-      // Auto-grow
+      // Auto-grow textarea
       textarea.style.height = 'auto';
       textarea.style.height = textarea.scrollHeight + 'px';
 
-      // Show +1 note once someone has typed anything
-      note.style.display = textarea.value.trim().length > 0 ? 'block' : 'none';
+      // Show +1 note once typing starts
+      plusOneNote.style.display = textarea.value.trim().length > 0 ? 'block' : 'none';
+
+      // Show attendance buttons once at least one name is entered
+      attendanceSection.classList.toggle('is-visible', participantCount > 0);
 
       // Swap pronouns
       const plural = participantCount > 1;
@@ -207,6 +305,16 @@
       });
     }
 
+    function selectAttendance(value) {
+      attendanceInput.value = value;
+      btnDecline.classList.toggle('is-selected', value === 'nej');
+      btnAttend.classList.toggle('is-selected', value === 'ja');
+      contactSection.classList.add('is-visible');
+      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    btnDecline.addEventListener('click', function() { selectAttendance('nej'); });
+    btnAttend.addEventListener('click', function() { selectAttendance('ja'); });
     textarea.addEventListener('input', update);
   </script>
 </body>
