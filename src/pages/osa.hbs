@@ -73,6 +73,13 @@
   const contactSection = document.getElementById('contact-section');
   let participantCount = 0;
 
+  const dev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  if (dev) {
+    btnDecline.disabled = false;
+    btnAttend.disabled = false;
+    contactSection.classList.add('is-visible');
+  }
+
   function update() {
     const lines = textarea.value.split('\n').filter(function(l) { return l.trim().length > 0; });
     participantCount = lines.length;
