@@ -316,6 +316,62 @@ textarea:focus { border-color: var(--text); }
   line-height: 1.5;
 }
 
+/* Radio choices */
+.radio-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radio-choice {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.radio-choice:hover { border-color: var(--text-dim); }
+
+.radio-choice input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1rem;
+  height: 1rem;
+  min-width: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.radio-choice input[type="radio"]:checked {
+  background: var(--text);
+  border-color: var(--text);
+}
+
+.radio-choice input[type="radio"]:checked::after {
+  content: '';
+  display: block;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--bg);
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+
+.radio-choice:has(input:checked) {
+  border-color: var(--text);
+  background: var(--surface);
+}
+
 /* Revealed form sections */
 .form-reveal {
   display: none;

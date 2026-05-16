@@ -71,6 +71,39 @@
       </div>
     </div>
 
+    <!-- Boende -->
+    <div class="osa-section form-reveal" id="accommodation-section">
+      <hr style="margin:0 0 var(--space-md)" />
+      <h2>Boende</h2>
+      <details class="accordion">
+        <summary>Information om boende under helgen</summary>
+        <div class="accordion__body">
+          <p>Vi har några alternativ för boende under bröllopshelgen, bland annat en härlig plats att tälta på, några vandrarhemsplatser reserverade och det finns flera hotell i Tranemo.</p>
+          <br>
+          <p>Vänner och bekanta i byn ställer också gärna upp med sovplats.</p>
+          <br>
+          {{> info-boende}}
+        </div>
+      </details>
+      <div class="field">
+        <label>Hur ordnar <span data-s="du" data-p="ni">du</span> boendet?</label>
+        <div class="radio-choices">
+          <label class="radio-choice">
+            <input type="radio" name="accommodation" value="sjalv" />
+            <span>Löser boendet själv</span>
+          </label>
+          <label class="radio-choice">
+            <input type="radio" name="accommodation" value="talt" />
+            <span>Kommer tälta</span>
+          </label>
+          <label class="radio-choice">
+            <input type="radio" name="accommodation" value="hjalp" />
+            <span>Önskar hjälp att ordna boende</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
     <!-- Kontaktinformation -->
     <div class="osa-section form-reveal" id="contact-section">
       <hr style="margin:0 0 var(--space-md)" />
@@ -102,6 +135,7 @@
   const btnAttend = document.getElementById('btn-attend');
   const contactSection = document.getElementById('contact-section');
   const daysSection = document.getElementById('days-section');
+  const accommodationSection = document.getElementById('accommodation-section');
   let participantCount = 0;
 
   const dev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
@@ -109,6 +143,7 @@
     btnDecline.disabled = false;
     btnAttend.disabled = false;
     daysSection.classList.add('is-visible');
+    accommodationSection.classList.add('is-visible');
     contactSection.classList.add('is-visible');
   }
 
@@ -137,6 +172,7 @@
     btnDecline.classList.toggle('is-selected', !attending);
     btnAttend.classList.toggle('is-selected', attending);
     daysSection.classList.toggle('is-visible', attending);
+    accommodationSection.classList.toggle('is-visible', attending);
     contactSection.classList.add('is-visible');
     const scrollTarget = attending ? daysSection : contactSection;
     scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
