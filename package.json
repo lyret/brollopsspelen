@@ -1,0 +1,11 @@
+{
+  "name": "brollopsspelen",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js --watch"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8"
+  }
+}
