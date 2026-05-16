@@ -4,6 +4,7 @@ const path = require("path");
 
 const SRC = path.join(__dirname, "src");
 const DIST = path.join(__dirname, ".dist");
+const baseUrl = (process.env.BASE_URL || "").replace(/\/$/, "");
 
 function copyDir(src, dest) {
   fs.mkdirSync(dest, { recursive: true });
@@ -22,7 +23,6 @@ function build() {
   fs.rmSync(DIST, { recursive: true, force: true });
   fs.mkdirSync(DIST, { recursive: true });
 
-  // Register partials
   const partialsDir = path.join(SRC, "partials");
   for (const file of fs.readdirSync(partialsDir)) {
     if (!file.endsWith(".hbs")) continue;
@@ -30,12 +30,12 @@ function build() {
     Handlebars.registerPartial(name, fs.readFileSync(path.join(partialsDir, file), "utf8"));
   }
 
-  // Load layout
   const layout = Handlebars.compile(
     fs.readFileSync(path.join(SRC, "layouts", "default.hbs"), "utf8")
   );
 
-  // Compile pages
+  const ctx = { baseUrl };
+
   const pagesDir = path.join(SRC, "pages");
   for (const file of fs.readdirSync(pagesDir)) {
     if (!file.endsWith(".hbs")) continue;
@@ -43,13 +43,12 @@ function build() {
     const pageTemplate = Handlebars.compile(
       fs.readFileSync(path.join(pagesDir, file), "utf8")
     );
-    const body = pageTemplate({});
-    const html = layout({ body });
+    const body = pageTemplate(ctx);
+    const html = layout({ ...ctx, body });
     if (name !== "index") fs.mkdirSync(path.join(DIST, name), { recursive: true });
     fs.writeFileSync(path.join(DIST, name === "index" ? "index.html" : `${name}/index.html`), html);
   }
 
-  // Copy static assets
   const publicDir = path.join(SRC, "public");
   if (fs.existsSync(publicDir)) {
     copyDir(publicDir, DIST);

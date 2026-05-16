@@ -72,11 +72,22 @@ body {
 }
 
 /* ============================================================
-   Navigation
+   Hero — two buttons
    ============================================================ */
 
-/* Desktop: fixed vertical list on the right */
-.site-nav {
+.hero__links {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: var(--space-sm);
+}
+
+/* ============================================================
+   Info page nav
+   ============================================================ */
+
+/* Desktop: fixed right, vertical TOC */
+.info-nav {
   position: fixed;
   right: 2rem;
   top: 50%;
@@ -84,41 +95,42 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 1.1rem;
+  gap: 0.7rem;
   z-index: 100;
 }
 
-.site-nav__link {
-  font-family: var(--font);
-  font-size: 0.8rem;
-  letter-spacing: 0.16em;
+.info-nav a {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
+  color: var(--text-dim);
+  transition: color 0.15s;
+}
+
+.info-nav a:hover,
+.info-nav a.active {
   color: var(--text);
-  background: rgba(247, 244, 239, 0.82);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  padding: 0.25rem 0.5rem;
-  transition: color 0.15s, background 0.15s;
 }
 
-.site-nav__link:hover {
-  background: rgba(247, 244, 239, 0.97);
+.info-nav__rule {
+  width: 100%;
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0.3rem 0;
 }
 
-/* Hamburger button — hidden on desktop */
-.nav-toggle {
+.info-nav-toggle {
   display: none;
 }
 
-/* Backdrop */
-.nav-backdrop {
+.info-nav-backdrop {
   display: none;
 }
 
 /* Mobile */
 @media (max-width: 700px) {
-  .nav-toggle {
+  .info-nav-toggle {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -129,15 +141,13 @@ body {
     z-index: 200;
     width: 2.2rem;
     height: 2.2rem;
-    background: rgba(247, 244, 239, 0.88);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: rgba(247, 244, 239, 0.92);
     border: none;
     cursor: pointer;
     padding: 0.45rem 0.5rem;
   }
 
-  .nav-toggle span {
+  .info-nav-toggle span {
     display: block;
     height: 1px;
     background: var(--text);
@@ -145,11 +155,11 @@ body {
     transform-origin: center;
   }
 
-  .nav-toggle.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-  .nav-toggle.is-open span:nth-child(2) { opacity: 0; }
-  .nav-toggle.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  .info-nav-toggle.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .info-nav-toggle.is-open span:nth-child(2) { opacity: 0; }
+  .info-nav-toggle.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-  .site-nav {
+  .info-nav {
     position: fixed;
     top: 0;
     right: -100%;
@@ -160,36 +170,38 @@ body {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 1.8rem;
-    padding: 2rem 2rem;
+    gap: 1.4rem;
+    padding: 2rem;
     transform: none;
     transition: right 0.25s ease;
     z-index: 150;
   }
 
-  .site-nav.is-open {
+  .info-nav.is-open {
     right: 0;
   }
 
-  .site-nav__link {
-    font-size: 1rem;
-    background: none;
-    backdrop-filter: none;
-    padding: 0;
+  .info-nav a {
+    font-size: 0.95rem;
   }
 
-  .nav-backdrop {
+  .info-nav__rule {
+    width: 2rem;
+    margin: 0.2rem 0;
+  }
+
+  .info-nav-backdrop {
     display: block;
     position: fixed;
     inset: 0;
-    background: rgba(30, 28, 26, 0.35);
+    background: rgba(30, 28, 26, 0.3);
     z-index: 140;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s;
   }
 
-  .nav-backdrop.is-visible {
+  .info-nav-backdrop.is-visible {
     opacity: 1;
     pointer-events: auto;
   }
@@ -203,7 +215,7 @@ body {
   max-width: 640px;
   margin: 0 auto;
   padding: var(--space-xl) var(--space-md);
-  padding-right: calc(var(--space-md) + 6rem); /* clear desktop nav */
+  padding-right: calc(var(--space-md) + 8rem);
 }
 
 @media (max-width: 700px) {

@@ -1,3 +1,23 @@
+<button class="info-nav-toggle" id="nav-toggle" aria-label="Meny">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<nav class="info-nav" id="info-nav">
+  <a href="#valkomst">Välkommen</a>
+  <a href="#vigsel">Vigsel</a>
+  <a href="#middag">Middag & Fest</a>
+  <a href="#boende">Boende</a>
+  <a href="#bra-att-veta">Bra att veta</a>
+  <a href="#kontakt">Kontakt</a>
+  <hr class="info-nav__rule" />
+  <a href="{{baseUrl}}/">Start</a>
+  <a href="{{baseUrl}}/rsvp">OSA</a>
+</nav>
+
+<div class="info-nav-backdrop" id="nav-backdrop"></div>
+
 <div class="info">
 
   <header class="info-header">
@@ -5,7 +25,7 @@
     <p class="info-header__date">Datum · Ort</p>
   </header>
 
-  <section class="info-section">
+  <section class="info-section" id="valkomst">
     <h2>Välkommen</h2>
     <p>
       Vi är så glada att du kan komma och fira med oss.
@@ -13,7 +33,7 @@
     </p>
   </section>
 
-  <section class="info-section">
+  <section class="info-section" id="vigsel">
     <h2>Vigsel</h2>
     <p>Tid och plats för vigseln.</p>
     <div class="info-address">
@@ -24,7 +44,7 @@
     </div>
   </section>
 
-  <section class="info-section">
+  <section class="info-section" id="middag">
     <h2>Middag & Fest</h2>
     <p>Middagen börjar vid 18:00 och festen håller på sent in på natten.</p>
     <div class="info-address">
@@ -36,10 +56,10 @@
   </section>
 
   <div class="info-image">
-    <img src="/bg.jpg" alt="Platsen" />
+    <img src="{{baseUrl}}/bg.jpg" alt="Platsen" />
   </div>
 
-  <section class="info-section">
+  <section class="info-section" id="boende">
     <h2>Boende</h2>
     <p>Det finns möjlighet att övernatta i närheten. Vi rekommenderar:</p>
     <ul class="info-list">
@@ -49,7 +69,7 @@
     </ul>
   </section>
 
-  <section class="info-section">
+  <section class="info-section" id="bra-att-veta">
     <h2>Bra att veta</h2>
     <dl class="info-dl">
       <dt>Klädsel</dt>
@@ -63,7 +83,7 @@
     </dl>
   </section>
 
-  <section class="info-section">
+  <section class="info-section" id="kontakt">
     <h2>Kontakt</h2>
     <p>Har du frågor? Hör gärna av dig till oss.</p>
     <ul class="info-list">
@@ -73,3 +93,43 @@
   </section>
 
 </div>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('info-nav');
+  const backdrop = document.getElementById('nav-backdrop');
+
+  function close() {
+    nav.classList.remove('is-open');
+    toggle.classList.remove('is-open');
+    backdrop.classList.remove('is-visible');
+  }
+
+  toggle.addEventListener('click', function () {
+    const open = nav.classList.toggle('is-open');
+    toggle.classList.toggle('is-open', open);
+    backdrop.classList.toggle('is-visible', open);
+  });
+
+  backdrop.addEventListener('click', close);
+
+  nav.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', close);
+  });
+
+  // Scroll spy
+  const sections = document.querySelectorAll('.info-section[id]');
+  const navLinks = nav.querySelectorAll('a[href^="#"]');
+
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        navLinks.forEach(function (l) { l.classList.remove('active'); });
+        const active = nav.querySelector('a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(function (s) { observer.observe(s); });
+</script>
