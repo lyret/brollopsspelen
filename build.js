@@ -55,7 +55,16 @@ function build() {
     copyDir(publicDir, DIST);
   }
 
-  console.log("Build complete →", DIST);
+  console.log(`[${new Date().toLocaleTimeString()}] Build complete → ${DIST}`);
 }
 
 build();
+
+if (process.argv.includes("--watch")) {
+  let debounce;
+  fs.watch(SRC, { recursive: true }, () => {
+    clearTimeout(debounce);
+    debounce = setTimeout(build, 100);
+  });
+  console.log("Watching src/ for changes…");
+}
