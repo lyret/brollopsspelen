@@ -6,6 +6,12 @@ const SRC = path.join(__dirname, "src");
 const DIST = path.join(__dirname, ".dist");
 const baseUrl = (process.env.BASE_URL || "").replace(/\/$/, "");
 
+const pageMeta = {
+  index:  { title: "Bröllopsspelen",         bodyClass: "page-index" },
+  info:   { title: "Info — Bröllopsspelen",   bodyClass: "page-info"  },
+  osa:    { title: "OSA — Bröllopsspelen",    bodyClass: "page-osa"   },
+};
+
 function copyDir(src, dest) {
   fs.mkdirSync(dest, { recursive: true });
   for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
@@ -34,12 +40,12 @@ function build() {
     fs.readFileSync(path.join(SRC, "layouts", "default.hbs"), "utf8")
   );
 
-  const ctx = { baseUrl };
-
   const pagesDir = path.join(SRC, "pages");
   for (const file of fs.readdirSync(pagesDir)) {
     if (!file.endsWith(".hbs")) continue;
     const name = path.basename(file, ".hbs");
+    const meta = pageMeta[name] || { title: "Bröllopsspelen", bodyClass: "" };
+    const ctx = { baseUrl, ...meta };
     const pageTemplate = Handlebars.compile(
       fs.readFileSync(path.join(pagesDir, file), "utf8")
     );

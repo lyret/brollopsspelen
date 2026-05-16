@@ -72,6 +72,249 @@ body {
 }
 
 /* ============================================================
+   OSA page
+   ============================================================ */
+
+body.page-osa {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.osa-back {
+  align-self: flex-start;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-lg);
+}
+
+.osa-back:hover { color: var(--text); }
+
+.osa-wrap {
+  width: 100%;
+  max-width: 520px;
+}
+
+.osa-header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.osa-header h1 {
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+
+.osa-header p {
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.osa-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.osa-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.osa-section h2 {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+label {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.note {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+input[type="tel"],
+input[type="email"] {
+  font-family: var(--font);
+  font-size: 1rem;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  outline: none;
+  padding: 0.4rem 0;
+  width: 100%;
+  transition: border-color 0.15s;
+}
+
+input:focus { border-bottom-color: var(--text); }
+input::placeholder { color: var(--border); font-style: italic; }
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--bg) inset;
+  -webkit-text-fill-color: var(--text);
+}
+
+textarea {
+  font-family: var(--font);
+  font-size: 1rem;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  outline: none;
+  padding: 0.5rem 0.6rem;
+  width: 100%;
+  line-height: 1.8;
+  resize: none;
+  overflow: hidden;
+  min-height: 2.8rem;
+  transition: border-color 0.15s;
+}
+
+textarea::placeholder { color: var(--border); font-style: italic; }
+textarea:focus { border-color: var(--text); }
+
+/* Attendance buttons */
+.attendance {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.btn-choice {
+  font-family: var(--font);
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  border: 1px solid transparent;
+  padding: 0.85rem 1.25rem;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: opacity 0.15s, outline 0.1s;
+  opacity: 0.88;
+}
+
+.btn-choice:hover:not(:disabled) { opacity: 1; }
+
+.btn-choice:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-decline { background: #7a2020; color: #f5ede8; }
+.btn-attend  { background: #2a5c38; color: #e8f0ea; }
+
+.btn-choice.is-selected {
+  opacity: 1;
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+/* Revealed form sections */
+.form-reveal {
+  display: none;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.form-reveal.is-visible { display: flex; }
+
+button[type="submit"] {
+  font-family: var(--font);
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--text);
+  border: none;
+  padding: 0.85rem 2rem;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: opacity 0.15s;
+  margin-top: var(--space-sm);
+}
+
+button[type="submit"]:hover { opacity: 0.75; }
+
+/* ============================================================
+   Accordion
+   ============================================================ */
+
+.accordion {
+  border-top: 1px solid var(--border);
+  padding-top: 0;
+}
+
+.accordion summary {
+  list-style: none;
+  cursor: pointer;
+  padding: var(--space-sm) 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  transition: color 0.15s;
+}
+
+.accordion summary::-webkit-details-marker { display: none; }
+
+.accordion summary::after {
+  content: '+';
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.accordion[open] summary::after { content: '−'; }
+
+.accordion summary:hover { color: var(--text); }
+
+.accordion__body {
+  padding-bottom: var(--space-md);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.accordion__body p,
+.accordion__body ul,
+.accordion__body dl {
+  margin-top: 0;
+}
+
+/* ============================================================
    Hero — two buttons
    ============================================================ */
 

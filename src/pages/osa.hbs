@@ -1,0 +1,106 @@
+<a class="osa-back" href="{{baseUrl}}/">← Framsidan</a>
+
+<div class="osa-wrap">
+  <header class="osa-header">
+    <h1>Katrin & Viktor</h1>
+    <p>Vi hoppas att <span data-s="du" data-p="ni">du</span> kan komma.<br>Fyll i formuläret nedan för att anmäla <span data-s="dig" data-p="er">dig</span>.</p>
+  </header>
+
+  <hr />
+
+  <form class="osa-form" action="https://formspree.io/f/xeenydqz" method="POST">
+    <input type="hidden" name="_subject" value="OSA — Bröllopsspelen" />
+    <input type="hidden" name="attendance" id="attendance-input" value="" />
+
+    <!-- Deltagare -->
+    <div class="osa-section">
+      <h2>Deltagare</h2>
+      <div class="field">
+        <label for="participants">Namn — ett per rad *</label>
+        <textarea id="participants" name="participants" placeholder="Anna Andersson" required rows="1"></textarea>
+        <p class="note">
+          Ange ett namn per rad för varje person <span data-s="du" data-p="ni">du</span> anmäler.
+          Tar <span data-s="du" data-p="ni">du</span> med barn, ange dem också och skriv deras ålder inom parentes — t.ex. <em>Liam Andersson (4 år)</em>.
+        </p>
+        <p class="note" id="plus-one-note" style="display:none">
+          Om <span data-s="du" data-p="någon av er">du</span> önskar ta med en +1 som inte är inbjuden, hör av dig till oss innan du anmäler.
+        </p>
+      </div>
+    </div>
+
+    <!-- Närvaro -->
+    <div class="osa-section" id="attendance-section">
+      <hr style="margin:0 0 var(--space-md)" />
+      <div class="attendance">
+        <button type="button" class="btn-choice btn-decline" id="btn-decline" disabled>
+          <span data-s="Jag" data-p="Vi">Jag</span> kan tyvärr ej närvara
+        </button>
+        <button type="button" class="btn-choice btn-attend" id="btn-attend" disabled>
+          <span data-s="Jag" data-p="Vi">Jag</span> kommer
+        </button>
+      </div>
+    </div>
+
+    <!-- Kontaktinformation -->
+    <div class="osa-section form-reveal" id="contact-section">
+      <hr style="margin:0 0 var(--space-md)" />
+      <h2>Kontaktinformation</h2>
+      <p class="note">
+        Ange kontaktuppgifter till <span data-s="dig" data-p="en av er">dig</span> så att vi kan nå <span data-s="dig" data-p="er">dig</span> vid behov och skicka bekräftelse.
+      </p>
+      <div class="field">
+        <label for="phone">Telefonnummer *</label>
+        <input type="tel" id="phone" name="phone" required autocomplete="tel" />
+      </div>
+      <div class="field">
+        <label for="email">E-postadress</label>
+        <input type="email" id="email" name="email" autocomplete="email" />
+        <p class="note">Används för att skicka en bekräftelse på <span data-s="din" data-p="er">din</span> anmälan.</p>
+      </div>
+
+      <button type="submit">Skicka OSA</button>
+    </div>
+
+  </form>
+</div>
+
+<script>
+  const textarea = document.getElementById('participants');
+  const plusOneNote = document.getElementById('plus-one-note');
+  const attendanceInput = document.getElementById('attendance-input');
+  const btnDecline = document.getElementById('btn-decline');
+  const btnAttend = document.getElementById('btn-attend');
+  const contactSection = document.getElementById('contact-section');
+  let participantCount = 0;
+
+  function update() {
+    const lines = textarea.value.split('\n').filter(function(l) { return l.trim().length > 0; });
+    participantCount = lines.length;
+
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+
+    plusOneNote.style.display = textarea.value.trim().length > 0 ? 'block' : 'none';
+
+    const hasName = participantCount > 0;
+    btnDecline.disabled = !hasName;
+    btnAttend.disabled = !hasName;
+
+    const plural = participantCount > 1;
+    document.querySelectorAll('[data-s]').forEach(function(el) {
+      el.textContent = plural ? el.dataset.p : el.dataset.s;
+    });
+  }
+
+  function selectAttendance(value) {
+    attendanceInput.value = value;
+    btnDecline.classList.toggle('is-selected', value === 'nej');
+    btnAttend.classList.toggle('is-selected', value === 'ja');
+    contactSection.classList.add('is-visible');
+    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  btnDecline.addEventListener('click', function() { selectAttendance('nej'); });
+  btnAttend.addEventListener('click', function() { selectAttendance('ja'); });
+  textarea.addEventListener('input', update);
+</script>
