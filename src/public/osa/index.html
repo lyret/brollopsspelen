@@ -156,7 +156,12 @@
       opacity: 0.88;
     }
 
-    .btn-choice:hover { opacity: 1; }
+    .btn-choice:hover:not(:disabled) { opacity: 1; }
+
+    .btn-choice:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
 
     .btn-decline {
       background: #7a2020;
@@ -235,13 +240,13 @@
       </div>
 
       <!-- Step 2: Attendance choice -->
-      <div class="form-reveal" id="attendance-section">
+      <div id="attendance-section">
         <hr style="margin:0" />
         <div class="attendance">
-          <button type="button" class="btn-choice btn-decline" id="btn-decline">
+          <button type="button" class="btn-choice btn-decline" id="btn-decline" disabled>
             <span data-s="Jag" data-p="Vi">Jag</span> kan tyvärr ej närvara
           </button>
-          <button type="button" class="btn-choice btn-attend" id="btn-attend">
+          <button type="button" class="btn-choice btn-attend" id="btn-attend" disabled>
             <span data-s="Jag" data-p="Vi">Jag</span> kommer
           </button>
         </div>
@@ -295,8 +300,10 @@
       // Show +1 note once typing starts
       plusOneNote.style.display = textarea.value.trim().length > 0 ? 'block' : 'none';
 
-      // Show attendance buttons once at least one name is entered
-      attendanceSection.classList.toggle('is-visible', participantCount > 0);
+      // Enable attendance buttons once at least one name is entered
+      const hasName = participantCount > 0;
+      btnDecline.disabled = !hasName;
+      btnAttend.disabled = !hasName;
 
       // Swap pronouns
       const plural = participantCount > 1;
