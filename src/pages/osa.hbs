@@ -6,7 +6,7 @@
     <p>Vi hoppas att <span data-s="du" data-p="ni">du</span> kan komma.<br>Fyll i formuläret nedan för att anmäla <span data-s="dig" data-p="er">dig</span>.</p>
   </header>
 
-  <hr />
+  <hr class="osa-rule" />
 
   <form class="osa-form" action="https://formspree.io/f/xeenydqz" method="POST">
     <input type="hidden" name="_subject" value="OSA — Bröllopsspelen" />
@@ -14,23 +14,35 @@
 
     <!-- Deltagare -->
     <div class="osa-section">
-      <h2>Deltagare</h2>
+      <label for="participants">Namn — ett per rad *</label>
+      <textarea id="participants" name="participants" placeholder="Anna Andersson" required rows="1"></textarea>
+      <p class="note">
+        Ange ett namn per rad för varje person <span data-s="du" data-p="ni">du</span> anmäler.
+        Tar <span data-s="du" data-p="ni">du</span> med barn, ange dem också och skriv deras ålder inom parentes — t.ex. <em>Liam Andersson (4 år)</em>.
+      </p>
+      <p class="note" id="plus-one-note" style="display:none">
+        Om <span data-s="du" data-p="någon av er">du</span> önskar ta med en +1 som inte är inbjuden, hör av dig till oss innan du anmäler.
+      </p>
+    </div>
+
+    <!-- Kontaktinformation -->
+    <hr class="osa-rule" />
+    <div class="osa-section">
+      <p class="osa-section__title">Kontaktinformation</p>
+      <p class="note">Ange kontaktuppgifter till <span data-s="dig" data-p="en av er">dig</span> så att vi kan nå <span data-s="dig" data-p="er">dig</span> vid behov.</p>
       <div class="field">
-        <label for="participants">Namn — ett per rad *</label>
-        <textarea id="participants" name="participants" placeholder="Anna Andersson" required rows="1"></textarea>
-        <p class="note">
-          Ange ett namn per rad för varje person <span data-s="du" data-p="ni">du</span> anmäler.
-          Tar <span data-s="du" data-p="ni">du</span> med barn, ange dem också och skriv deras ålder inom parentes — t.ex. <em>Liam Andersson (4 år)</em>.
-        </p>
-        <p class="note" id="plus-one-note" style="display:none">
-          Om <span data-s="du" data-p="någon av er">du</span> önskar ta med en +1 som inte är inbjuden, hör av dig till oss innan du anmäler.
-        </p>
+        <label for="phone">Telefonnummer *</label>
+        <input type="tel" id="phone" name="phone" required autocomplete="tel" />
+      </div>
+      <div class="field">
+        <label for="email">E-postadress</label>
+        <input type="email" id="email" name="email" autocomplete="email" />
       </div>
     </div>
 
     <!-- Närvaro -->
-    <div class="osa-section" id="attendance-section">
-      <hr style="margin:0 0 var(--space-md)" />
+    <hr class="osa-rule" />
+    <div class="osa-section">
       <div class="attendance">
         <button type="button" class="btn-choice btn-decline" id="btn-decline" disabled>
           <span data-s="Jag" data-p="Vi">Jag</span> kan tyvärr ej närvara
@@ -43,8 +55,8 @@
 
     <!-- Vilka dagar -->
     <div class="osa-section form-reveal" id="days-section">
-      <hr style="margin:0 0 var(--space-md)" />
-      <h2>Vilka dagar är <span data-s="du" data-p="ni">du</span> med?</h2>
+      <hr class="osa-rule" />
+      <p class="osa-section__title">Vilka dagar är <span data-s="du" data-p="ni">du</span> med?</p>
       <p class="note">Välj alla dagar som stämmer — det hjälper oss att planera mat, boende och aktiviteter.</p>
       <div class="day-choices">
         <label class="day-choice">
@@ -73,54 +85,36 @@
 
     <!-- Boende -->
     <div class="osa-section form-reveal" id="accommodation-section">
-      <hr style="margin:0 0 var(--space-md)" />
-      <h2>Boende</h2>
+      <hr class="osa-rule" />
+      <p class="osa-section__title">Boende</p>
       <details class="accordion">
         <summary>Information om boende under helgen</summary>
         <div class="accordion__body">
           <p>Vi har några alternativ för boende under bröllopshelgen, bland annat en härlig plats att tälta på, några vandrarhemsplatser reserverade och det finns flera hotell i Tranemo.</p>
-          <br>
           <p>Vänner och bekanta i byn ställer också gärna upp med sovplats.</p>
-          <br>
           {{> info-boende}}
         </div>
       </details>
-      <div class="field">
-        <label>Hur ordnar <span data-s="du" data-p="ni">du</span> boendet?</label>
-        <div class="radio-choices">
-          <label class="radio-choice">
-            <input type="radio" name="accommodation" value="sjalv" />
-            <span>Löser boendet själv</span>
-          </label>
-          <label class="radio-choice">
-            <input type="radio" name="accommodation" value="talt" />
-            <span>Kommer tälta</span>
-          </label>
-          <label class="radio-choice">
-            <input type="radio" name="accommodation" value="hjalp" />
-            <span>Önskar hjälp att ordna boende</span>
-          </label>
-        </div>
+      <p class="osa-section__question">Hur ordnar <span data-s="du" data-p="ni">du</span> boendet?</p>
+      <div class="radio-choices">
+        <label class="radio-choice">
+          <input type="radio" name="accommodation" value="sjalv" />
+          <span>Löser boendet själv</span>
+        </label>
+        <label class="radio-choice">
+          <input type="radio" name="accommodation" value="talt" />
+          <span>Kommer tälta</span>
+        </label>
+        <label class="radio-choice">
+          <input type="radio" name="accommodation" value="hjalp" />
+          <span>Önskar hjälp att ordna boende</span>
+        </label>
       </div>
     </div>
 
-    <!-- Kontaktinformation -->
-    <div class="osa-section form-reveal" id="contact-section">
-      <hr style="margin:0 0 var(--space-md)" />
-      <h2>Kontaktinformation</h2>
-      <p class="note">
-        Ange kontaktuppgifter till <span data-s="dig" data-p="en av er">dig</span> så att vi kan nå <span data-s="dig" data-p="er">dig</span> vid behov och skicka bekräftelse.
-      </p>
-      <div class="field">
-        <label for="phone">Telefonnummer *</label>
-        <input type="tel" id="phone" name="phone" required autocomplete="tel" />
-      </div>
-      <div class="field">
-        <label for="email">E-postadress</label>
-        <input type="email" id="email" name="email" autocomplete="email" />
-        <p class="note">Används för att skicka en bekräftelse på <span data-s="din" data-p="er">din</span> anmälan.</p>
-      </div>
-
+    <!-- Skicka -->
+    <div class="form-reveal" id="submit-section">
+      <hr class="osa-rule" />
       <button type="submit">Skicka OSA</button>
     </div>
 
@@ -133,9 +127,9 @@
   const attendanceInput = document.getElementById('attendance-input');
   const btnDecline = document.getElementById('btn-decline');
   const btnAttend = document.getElementById('btn-attend');
-  const contactSection = document.getElementById('contact-section');
   const daysSection = document.getElementById('days-section');
   const accommodationSection = document.getElementById('accommodation-section');
+  const submitSection = document.getElementById('submit-section');
   let participantCount = 0;
 
   const dev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
@@ -144,7 +138,7 @@
     btnAttend.disabled = false;
     daysSection.classList.add('is-visible');
     accommodationSection.classList.add('is-visible');
-    contactSection.classList.add('is-visible');
+    submitSection.classList.add('is-visible');
   }
 
   function update() {
@@ -173,8 +167,8 @@
     btnAttend.classList.toggle('is-selected', attending);
     daysSection.classList.toggle('is-visible', attending);
     accommodationSection.classList.toggle('is-visible', attending);
-    contactSection.classList.add('is-visible');
-    const scrollTarget = attending ? daysSection : contactSection;
+    submitSection.classList.add('is-visible');
+    const scrollTarget = attending ? daysSection : submitSection;
     scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
