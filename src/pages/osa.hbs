@@ -59,34 +59,34 @@
     <div class="osa-section form-reveal" id="days-section">
       {{> divider}}
       <p class="section-title">Vilka dagar är <span data-s="du" data-p="ni">du</span> med?</p>
-      <p class="note">Välj alla dagar som stämmer — det hjälper oss att planera mat, boende och aktiviteter.</p>
+      <p class="note">Välj alla dagar som stämmer — det hjälper oss att planera mat och aktiviteter.</p>
       <details class="accordion">
         <summary>Läs mer om helgens schema...</summary>
         <div class="accordion__body">
           {{> info-om-helgen}}
         </div>
       </details>
-      <label for="email">Aktiviteter</label>
+      <label for="email">Dagar</label>
       <div class="day-choices">
         <label class="day-choice">
           <input type="checkbox" name="days" value="fredag" />
           <div class="day-choice__body">
             <strong>Fredag</strong>
-            <span>Är med på fix, förfest och prepp med grillning.</span>
+            <span>Fix, förfest och grill i Småhusbyn.</span>
           </div>
         </label>
         <label class="day-choice">
           <input type="checkbox" name="days" value="lordag" checked />
           <div class="day-choice__body">
             <strong>Lördag</strong>
-            <span>Bröllopsdagen pågår från förmiddagen till sent på natten.</span>
+            <span>Lek, mingel och dans från morgon till natt <br>Vigselceremoni</span>
           </div>
         </label>
         <label class="day-choice">
           <input type="checkbox" name="days" value="sondag" />
           <div class="day-choice__body">
             <strong>Söndag</strong>
-            <span>Brunch och strike.</span>
+            <span>Gemensam brunch på Mjällbo.</span>
           </div>
         </label>
       </div>
@@ -227,6 +227,14 @@
   btnDecline.addEventListener('click', function() { selectAttendance('nej'); });
   btnAttend.addEventListener('click', function() { selectAttendance('ja'); });
   textarea.addEventListener('input', update);
+
+  document.querySelector('.osa-form').addEventListener('submit', function() {
+    var nextInput = document.querySelector('input[name="_next"]');
+    var url = new URL(nextInput.value || '/tack', window.location.href);
+    url.searchParams.set('attendance', attendanceInput.value);
+    url.searchParams.set('plural', participantCount > 1 ? '1' : '0');
+    nextInput.value = url.toString();
+  });
 
   document.querySelectorAll('textarea:not(#participants)').forEach(function(ta) {
     ta.addEventListener('input', function() {
