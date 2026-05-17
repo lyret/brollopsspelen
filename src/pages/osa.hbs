@@ -1,11 +1,11 @@
 <a class="osa-back" href="{{baseUrl}}/">← Framsidan</a>
 
 <div class="osa-wrap">
-  <header class="osa-header">
-    <p class="osa-header__date"><span id="couple-names"></span> - 22:a augusti.</p>
+  <header class="site-header">
+    <p class="site-header__date"><span id="couple-names"></span> - 22:a augusti.</p>
     <h1><img class="site-logo" src="{{baseUrl}}/brollopsspelen.png" alt="Bröllopsspelen" /></h1>
-    <a class="osa-header__contact" href="{{baseUrl}}/info#kontakt">Kontakta oss om du undrar något.</a><br/>
-    <a class="osa-header__contact" href="{{baseUrl}}/info">Frågor och svar.</a>
+    <a class="site-header__contact" href="{{baseUrl}}/info#kontakt">Kontakta oss om du undrar något.</a><br/>
+    <a class="site-header__contact" href="{{baseUrl}}/info">Frågor och svar.</a>
     <p>Fyll i formuläret nedan för att anmäla dig och ev. sällskap.<br>Vi hoppas att <span data-s="du" data-p="ni">du</span> kan komma.</p>
   </header>
 
@@ -13,6 +13,7 @@
 
   <form class="osa-form" action="https://formspree.io/f/xeenydqz" method="POST">
     <input type="hidden" name="_subject" value="OSA — Bröllopsspelen" />
+    <input type="hidden" name="_next" value="{{baseUrl}}/tack" />
     <input type="hidden" name="attendance" id="attendance-input" value="" />
 
     <!-- Deltagare -->
@@ -23,7 +24,7 @@
       </p>
       <label for="participants">Namn - ett par rad *</label>
       <textarea id="participants" name="participants" placeholder="Kal Andersson" required rows="2"></textarea>
-      <a class="osa-header__contact" href="{{baseUrl}}/info#barn">Läs om barn på bröllopet →</a>
+      <a class="site-header__contact" href="{{baseUrl}}/info#barn">Läs om barn på bröllopet →</a>
     </div>
 
     <!-- Närvaro -->
@@ -40,9 +41,9 @@
     </div>
 
     <!-- Kontaktinformation -->
-    {{> divider}}
-    <div class="osa-section" id="kontakt-section">
-      <p class="osa-section__title">Kontaktinformation</p>
+    <div class="osa-section form-reveal" id="kontakt-section">
+      {{> divider}}
+      <p class="section-title">Kontaktinformation</p>
       <p class="note">Ange kontaktuppgifter till <span data-s="dig" data-p="en av er">dig</span> så att vi kan nå <span data-s="dig" data-p="er">dig</span> vid behov.</p>
       <div class="field">
         <label for="phone">Telefonnummer *</label>
@@ -57,7 +58,7 @@
     <!-- Vilka dagar -->
     <div class="osa-section form-reveal" id="days-section">
       {{> divider}}
-      <p class="osa-section__title">Vilka dagar är <span data-s="du" data-p="ni">du</span> med?</p>
+      <p class="section-title">Vilka dagar är <span data-s="du" data-p="ni">du</span> med?</p>
       <p class="note">Välj alla dagar som stämmer — det hjälper oss att planera mat, boende och aktiviteter.</p>
       <details class="accordion">
         <summary>Läs mer om helgens schema...</summary>
@@ -84,7 +85,7 @@
         <label class="day-choice">
           <input type="checkbox" name="days" value="sondag" />
           <div class="day-choice__body">
-            <strong>Jag stannarSöndag</strong>
+            <strong>Söndag</strong>
             <span>Brunch och strike.</span>
           </div>
         </label>
@@ -94,7 +95,7 @@
     <!-- Boende -->
     <div class="osa-section form-reveal" id="accommodation-section">
       {{> divider}}
-      <p class="osa-section__title">Boende</p>
+      <p class="section-title">Boende</p>
       <div class="note">
       För er som kommer långvägars finns det flera alternativ att välja på som du kan läsa mer om här på sidan, vi hjälper gärna till med boendet om Hur ordnar <span data-s="du" data-p="ni">du</span> önskar detta.
     </div>
@@ -109,7 +110,7 @@
       <label>Hur ordnar <span data-s="du" data-p="ni">du</span> boendet?</label>
       <div class="radio-choices">
         <label class="radio-choice">
-          <input type="radio" name="accommodation" value="sjalv" />
+          <input type="radio" name="accommodation" value="sjalv" required />
           <span><span data-s="Jag" data-p="Vi">Jag</span> löser boendet själv</span>
         </label>
         <label class="radio-choice">
@@ -126,7 +127,7 @@
     <!-- Kost -->
     <div class="osa-section form-reveal" id="kost-section">
       {{> divider}}
-      <p class="osa-section__title">Kost</p>
+      <p class="section-title">Kost</p>
       <div class="note">
       All mat som serveras på bröllopet kommer vara vegetarisk 🌱 men inte nödvändigtvis vegansk, anmäl gärna om du önskar detta, eller har övriga allergier / önskemål.</div>
       <details class="accordion">
@@ -144,7 +145,7 @@
     <!-- Något mer -->
     <div class="osa-section form-reveal" id="more-section">
       {{> divider}}
-      <p class="osa-section__title">Något mer <span data-s="du" data-p="ni">du</span> vill att vi ska veta?</p>
+      <p class="section-title">Något mer <span data-s="du" data-p="ni">du</span> vill att vi ska veta?</p>
       <div class="field">
         <textarea name="more" placeholder="Skriv gärna vad som helst…" rows="2"></textarea>
       </div>
@@ -178,6 +179,7 @@
   if (dev) {
     btnDecline.disabled = false;
     btnAttend.disabled = false;
+    kontaktSection.classList.add('is-visible');
     daysSection.classList.add('is-visible');
     accommodationSection.classList.add('is-visible');
     kostSection.classList.add('is-visible');
@@ -207,13 +209,19 @@
     const attending = value === 'ja';
     btnDecline.classList.toggle('is-selected', !attending);
     btnAttend.classList.toggle('is-selected', attending);
+    kontaktSection.classList.toggle('is-visible', attending);
+    document.getElementById('phone').required = attending;
+    document.querySelector('input[name="accommodation"]').required = attending;
     daysSection.classList.toggle('is-visible', attending);
     accommodationSection.classList.toggle('is-visible', attending);
     kostSection.classList.toggle('is-visible', attending);
     moreSection.classList.add('is-visible');
     submitSection.classList.add('is-visible');
-    const scrollTarget = attending ? kontaktSection : submitSection;
-    scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (attending) {
+      document.getElementById('phone').focus();
+    } else {
+      moreSection.querySelector('textarea').focus();
+    }
   }
 
   btnDecline.addEventListener('click', function() { selectAttendance('nej'); });

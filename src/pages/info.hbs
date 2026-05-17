@@ -29,10 +29,11 @@
 
 <div class="info">
 
-  <header class="info-header">
+  <header class="site-header">
+    <p class="site-header__date"><span id="couple-names"></span> - 22:a augusti.</p>
     <h1><img class="site-logo" src="{{baseUrl}}/brollopsspelen.png" alt="Bröllopsspelen" /></h1>
-    <p class="info-header__date">22 augusti</p>
   </header>
+  <p class="page-subtitle">Information inför bröllopet</p>
 
   <section class="info-section" id="valkomst">
     <h2>Välkommen</h2>
@@ -76,6 +77,8 @@
 </div>
 
 <script>
+  document.getElementById('couple-names').textContent = Math.random() < 0.5 ? 'Katrin ⚭ Viktor' : 'Viktor ⚭ Katrin';
+
   const toggle = document.getElementById('nav-toggle');
   const nav = document.getElementById('info-nav');
   const backdrop = document.getElementById('nav-backdrop');

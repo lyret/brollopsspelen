@@ -10,6 +10,7 @@ const pageMeta = {
   index:  { title: "Bröllopspelen",         bodyClass: "page-index" },
   info:   { title: "Info — Bröllopspelen",   bodyClass: "page-info"  },
   osa:    { title: "OSA — Bröllopspelen",    bodyClass: "page-osa"   },
+  tack:   { title: "Tack! — Bröllopspelen",  bodyClass: "page-osa"   },
 };
 
 function copyDir(src, dest) {

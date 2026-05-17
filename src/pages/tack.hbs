@@ -1,0 +1,28 @@
+<div class="osa-wrap tack-wrap">
+  <header class="site-header">
+    <p class="site-header__date"><span id="couple-names"></span> - 22:a augusti.</p>
+    <h1><img class="site-logo" src="{{baseUrl}}/brollopsspelen.png" alt="Bröllopsspelen" /></h1>
+  </header>
+
+  {{> divider}}
+
+  <div class="tack-body">
+    <p class="tack-title">Tack för din anmälan!</p>
+    <img class="tack-rose" src="{{baseUrl}}/rose1.png" alt="" aria-hidden="true" />
+    <p class="tack-text">Vi ser fram emot att fira med <span id="tack-du">dig</span>.<br>Om du har frågor är du alltid välkommen att höra av dig.</p>
+    <div class="tack-links">
+      <a href="{{baseUrl}}/">Tillbaka till framsidan →</a>
+      <a href="{{baseUrl}}/info">Läs mer om helgen →</a>
+    </div>
+    {{> divider}}
+  </div>
+</div>
+
+<script>
+  document.getElementById('couple-names').textContent = Math.random() < 0.5 ? 'Katrin ⚭ Viktor' : 'Viktor ⚭ Katrin';
+
+  const params = new URLSearchParams(window.location.search);
+  const participants = params.get('participants') || '';
+  const count = participants.split('\n').filter(function(l) { return l.trim().length > 0; }).length;
+  if (count > 1) document.getElementById('tack-du').textContent = 'er';
+</script>

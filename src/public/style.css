@@ -105,10 +105,11 @@ body.page-osa {
 .osa-wrap {
 	width: 100%;
 	max-width: 520px;
+	margin: 0 auto;
 	padding-bottom: calc(var(--space-xl) * 2);
 }
 
-.osa-header {
+.site-header {
 	text-align: center;
 	margin-bottom: var(--space-lg);
 }
@@ -119,23 +120,17 @@ body.page-osa {
 	max-width: 360px;
 	height: auto;
 	margin: 0 auto;
+	margin-bottom: 0.45em;
 }
 
-.osa-header h1 {
-	font-size: clamp(1.5rem, 4vw, 2.1rem);
-	font-weight: 400;
-	letter-spacing: 0.04em;
-	margin-bottom: 0.5rem;
-}
-
-.osa-header__date {
+.site-header__date {
 	color: var(--text-dim);
 	font-style: italic;
 	font-size: 1rem;
 	margin-bottom: 0.4rem;
 }
 
-.osa-header__contact {
+.site-header__contact {
 	display: inline-block;
 	margin-top: 0.45rem;
 	margin-bottom: 0.45rem;
@@ -146,11 +141,20 @@ body.page-osa {
 	text-underline-offset: 3px;
 }
 
-.osa-header p {
+.site-header p {
 	font-style: italic;
 	color: var(--text-dim);
 	font-size: 1rem;
 	line-height: 1.7;
+}
+
+.page-subtitle {
+	text-align: center;
+	font-size: 1.5rem;
+	font-style: italic;
+	font-weight: 400;
+	color: var(--text-dim);
+	margin-bottom: var(--space-md);
 }
 
 .osa-form {
@@ -172,7 +176,7 @@ body.page-osa {
 	gap: 0.75rem;
 }
 
-.osa-section__title {
+.section-title {
 	font-size: 1.3rem;
 	font-weight: 500;
 	color: var(--text);
@@ -572,7 +576,7 @@ button[type="submit"]:hover {
 .accordion__body {
 	padding: var(--space-sm) var(--space-md) var(--space-md);
 	border-top: 1px solid var(--divider);
-	font-size: 0.95rem;
+	font-size: 1.1rem;
 	line-height: 1.75;
 }
 
@@ -722,6 +726,68 @@ button[type="submit"]:hover {
 }
 
 /* ============================================================
+   Tack page
+   ============================================================ */
+
+.tack-wrap {
+	text-align: center;
+	padding-top: var(--space-xl);
+}
+
+.tack-body {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-lg);
+	align-items: center;
+	text-align: center;
+}
+
+.tack-rose {
+	width: 160px;
+	height: auto;
+	opacity: 0.75;
+}
+
+.tack-title {
+	font-size: clamp(1.4rem, 4vw, 2rem);
+	font-weight: 400;
+	letter-spacing: 0.04em;
+}
+
+.tack-text {
+	font-style: italic;
+	color: var(--text-dim);
+	font-size: 1.1rem;
+	line-height: 1.8;
+}
+
+.tack-links {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	width: 100%;
+}
+
+.tack-links a {
+	display: block;
+	font-size: 1rem;
+	color: var(--text);
+	text-decoration: none;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	border: 1px solid var(--border);
+	padding: 0.85rem 1.25rem;
+	transition:
+		border-color 0.15s,
+		background 0.15s;
+}
+
+.tack-links a:hover {
+	border-color: var(--text);
+	background: var(--surface);
+}
+
+/* ============================================================
    Info page
    ============================================================ */
 
@@ -737,25 +803,6 @@ button[type="submit"]:hover {
 		padding-right: var(--space-md);
 		padding-top: calc(var(--space-xl) + 1rem);
 	}
-}
-
-.info-header {
-	margin-bottom: var(--space-lg);
-	padding-bottom: var(--space-md);
-	border-bottom: 1px solid var(--divider);
-}
-
-.info-header h1 {
-	font-size: clamp(1.6rem, 4vw, 2.4rem);
-	font-weight: 400;
-	letter-spacing: 0.04em;
-	margin-bottom: 0.3rem;
-}
-
-.info-header__date {
-	color: var(--text-dim);
-	font-style: italic;
-	font-size: 1rem;
 }
 
 .info-section {
