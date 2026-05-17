@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "node build.js",
-    "dev": "concurrently \"node build.js --watch\" \"browser-sync start --server .dist --port 3000 --files '.dist/**/*' --no-notify\""
+    "dev": "concurrently \"node build.js --watch\" \"browser-sync start --server .dist --port 3000 --files '.dist/**/*' --no-notify --no-inject-changes --no-open --reload-delay 150\""
   },
   "dependencies": {
     "handlebars": "^4.7.8"

@@ -2,8 +2,11 @@
 
 <div class="osa-wrap">
   <header class="osa-header">
-    <h1>Katrin & Viktor</h1>
-    <p>Vi hoppas att <span data-s="du" data-p="ni">du</span> kan komma.<br>Fyll i formuläret nedan för att anmäla <span data-s="dig" data-p="er">dig</span>.</p>
+    <p class="osa-header__date"><span id="couple-names"></span> - 22:a augusti.</p>
+    <h1><img class="site-logo" src="{{baseUrl}}/brollopsspelen.png" alt="Bröllopsspelen" /></h1>
+    <a class="osa-header__contact" href="{{baseUrl}}/info#kontakt">Kontakta oss om du undrar något.</a><br/>
+    <a class="osa-header__contact" href="{{baseUrl}}/info">Frågor och svar.</a>
+    <p>Fyll i formuläret nedan för att anmäla dig och ev. sällskap.<br>Vi hoppas att <span data-s="du" data-p="ni">du</span> kan komma.</p>
   </header>
 
   {{> divider}}
@@ -14,30 +17,13 @@
 
     <!-- Deltagare -->
     <div class="osa-section">
-      <label for="participants">Namn — ett per rad *</label>
-      <textarea id="participants" name="participants" placeholder="Anna Andersson" required rows="2"></textarea>
       <p class="note">
         Ange ett namn per rad för varje person <span data-s="du" data-p="ni">du</span> anmäler.
-        Tar <span data-s="du" data-p="ni">du</span> med barn, ange dem också och skriv deras ålder inom parentes — t.ex. <em>Liam Andersson (4 år)</em>.
+        Anmäl även de barn <span data-s="du" data-p="ni">du</span> som följer med, skriv deras ålder efter namnet — t.ex. <em>Finn Lysvret, 1 år</em>.
       </p>
-      <p class="note" id="plus-one-note" style="display:none">
-        Om <span data-s="du" data-p="någon av er">du</span> önskar ta med en +1 som inte är inbjuden, hör av dig till oss innan du anmäler.
-      </p>
-    </div>
-
-    <!-- Kontaktinformation -->
-    {{> divider}}
-    <div class="osa-section">
-      <p class="osa-section__title">Kontaktinformation</p>
-      <p class="note">Ange kontaktuppgifter till <span data-s="dig" data-p="en av er">dig</span> så att vi kan nå <span data-s="dig" data-p="er">dig</span> vid behov.</p>
-      <div class="field">
-        <label for="phone">Telefonnummer *</label>
-        <input type="tel" id="phone" name="phone" required autocomplete="tel" />
-      </div>
-      <div class="field">
-        <label for="email">E-postadress</label>
-        <input type="email" id="email" name="email" autocomplete="email" />
-      </div>
+      <label for="participants">Namn - ett par rad *</label>
+      <textarea id="participants" name="participants" placeholder="Kal Andersson" required rows="2"></textarea>
+      <a class="osa-header__contact" href="{{baseUrl}}/info#barn">Läs om barn på bröllopet →</a>
     </div>
 
     <!-- Närvaro -->
@@ -53,17 +39,33 @@
       </div>
     </div>
 
+    <!-- Kontaktinformation -->
+    {{> divider}}
+    <div class="osa-section" id="kontakt-section">
+      <p class="osa-section__title">Kontaktinformation</p>
+      <p class="note">Ange kontaktuppgifter till <span data-s="dig" data-p="en av er">dig</span> så att vi kan nå <span data-s="dig" data-p="er">dig</span> vid behov.</p>
+      <div class="field">
+        <label for="phone">Telefonnummer *</label>
+        <input type="tel" id="phone" name="phone" required autocomplete="tel" />
+      </div>
+      <div class="field">
+        <label for="email">E-postadress</label>
+        <input type="email" id="email" name="email" autocomplete="email" />
+      </div>
+    </div>
+
     <!-- Vilka dagar -->
     <div class="osa-section form-reveal" id="days-section">
       {{> divider}}
       <p class="osa-section__title">Vilka dagar är <span data-s="du" data-p="ni">du</span> med?</p>
+      <p class="note">Välj alla dagar som stämmer — det hjälper oss att planera mat, boende och aktiviteter.</p>
       <details class="accordion">
         <summary>Läs mer om helgens schema...</summary>
         <div class="accordion__body">
           {{> info-om-helgen}}
         </div>
       </details>
-      <p class="note">Välj alla dagar som stämmer — det hjälper oss att planera mat, boende och aktiviteter.</p>
+      <label for="email">Aktiviteter</label>
       <div class="day-choices">
         <label class="day-choice">
           <input type="checkbox" name="days" value="fredag" />
@@ -73,7 +75,7 @@
           </div>
         </label>
         <label class="day-choice">
-          <input type="checkbox" name="days" value="lordag" />
+          <input type="checkbox" name="days" value="lordag" checked />
           <div class="day-choice__body">
             <strong>Lördag</strong>
             <span>Bröllopsdagen pågår från förmiddagen till sent på natten.</span>
@@ -82,7 +84,7 @@
         <label class="day-choice">
           <input type="checkbox" name="days" value="sondag" />
           <div class="day-choice__body">
-            <strong>Söndag</strong>
+            <strong>Jag stannarSöndag</strong>
             <span>Brunch och strike.</span>
           </div>
         </label>
@@ -93,27 +95,30 @@
     <div class="osa-section form-reveal" id="accommodation-section">
       {{> divider}}
       <p class="osa-section__title">Boende</p>
+      <div class="note">
+      För er som kommer långvägars finns det flera alternativ att välja på som du kan läsa mer om här på sidan, vi hjälper gärna till med boendet om Hur ordnar <span data-s="du" data-p="ni">du</span> önskar detta.
+    </div>
       <details class="accordion">
-        <summary>Läs mer om möjliga boenden...</summary>
+        <summary>Läs mer om boendealternativ</summary>
         <div class="accordion__body">
           <p>Vi har några alternativ för boende under bröllopshelgen, bland annat en härlig plats att tälta på, några vandrarhemsplatser reserverade och det finns flera hotell i Tranemo.</p>
           <p>Vänner och bekanta i byn ställer också gärna upp med sovplats.</p>
           {{> info-boende}}
         </div>
       </details>
-      <p class="osa-section__question">Hur ordnar <span data-s="du" data-p="ni">du</span> boendet?</p>
+      <label>Hur ordnar <span data-s="du" data-p="ni">du</span> boendet?</label>
       <div class="radio-choices">
         <label class="radio-choice">
           <input type="radio" name="accommodation" value="sjalv" />
-          <span>Löser boendet själv</span>
+          <span><span data-s="Jag" data-p="Vi">Jag</span> löser boendet själv</span>
         </label>
         <label class="radio-choice">
           <input type="radio" name="accommodation" value="talt" />
-          <span>Kommer tälta</span>
+          <span><span data-s="Jag" data-p="Vi">Jag</span>  kommer tälta på Mjällbo</span>
         </label>
         <label class="radio-choice">
           <input type="radio" name="accommodation" value="hjalp" />
-          <span>Önskar hjälp att ordna boende</span>
+          <span><span data-s="Jag" data-p="Vi">Jag</span>  önskar hjälp att ordna boende</span>
         </label>
       </div>
     </div>
@@ -122,6 +127,8 @@
     <div class="osa-section form-reveal" id="kost-section">
       {{> divider}}
       <p class="osa-section__title">Kost</p>
+      <div class="note">
+      All mat som serveras på bröllopet kommer vara vegetarisk 🌱 men inte nödvändigtvis vegansk, anmäl gärna om du önskar detta, eller har övriga allergier / önskemål.</div>
       <details class="accordion">
         <summary>Läs mer om mat under helgen...</summary>
         <div class="accordion__body">
@@ -153,11 +160,13 @@
 </div>
 
 <script>
+  document.getElementById('couple-names').textContent = Math.random() < 0.5 ? 'Katrin ⚭ Viktor' : 'Viktor ⚭ Katrin';
+
   const textarea = document.getElementById('participants');
-  const plusOneNote = document.getElementById('plus-one-note');
   const attendanceInput = document.getElementById('attendance-input');
   const btnDecline = document.getElementById('btn-decline');
   const btnAttend = document.getElementById('btn-attend');
+  const kontaktSection = document.getElementById('kontakt-section');
   const daysSection = document.getElementById('days-section');
   const accommodationSection = document.getElementById('accommodation-section');
   const kostSection = document.getElementById('kost-section');
@@ -183,8 +192,6 @@
     textarea.style.height = 'auto';
     textarea.style.height = textarea.scrollHeight + 'px';
 
-    plusOneNote.style.display = textarea.value.trim().length > 0 ? 'block' : 'none';
-
     const hasName = participantCount > 0;
     btnDecline.disabled = !hasName;
     btnAttend.disabled = !hasName;
@@ -205,7 +212,7 @@
     kostSection.classList.toggle('is-visible', attending);
     moreSection.classList.add('is-visible');
     submitSection.classList.add('is-visible');
-    const scrollTarget = attending ? daysSection : submitSection;
+    const scrollTarget = attending ? kontaktSection : submitSection;
     scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 

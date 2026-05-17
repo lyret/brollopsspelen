@@ -1,7 +1,15 @@
 <button class="info-nav-toggle" id="nav-toggle" aria-label="Meny">
-  <span></span>
-  <span></span>
-  <span></span>
+  <svg class="nav-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g class="nav-hamburger">
+      <line x1="3" y1="7"  x2="21" y2="7"  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="3" y1="17" x2="21" y2="17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    <g class="nav-close">
+      <line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="19" y1="5" x2="5"  y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+  </svg>
 </button>
 
 <nav class="info-nav" id="info-nav">
@@ -10,6 +18,7 @@
   <a href="#middag">Middag & Fest</a>
   <a href="#boende">Boende</a>
   <a href="#bra-att-veta">Bra att veta</a>
+  <a href="#barn">Barn</a>
   <a href="#kontakt">Kontakt</a>
   <hr class="info-nav__rule" />
   <a href="{{baseUrl}}/">Framsidan</a>
@@ -21,8 +30,8 @@
 <div class="info">
 
   <header class="info-header">
-    <h1>Katrin & Viktor</h1>
-    <p class="info-header__date">Datum · Ort</p>
+    <h1><img class="site-logo" src="{{baseUrl}}/brollopsspelen.png" alt="Bröllopsspelen" /></h1>
+    <p class="info-header__date">22 augusti</p>
   </header>
 
   <section class="info-section" id="valkomst">
@@ -52,6 +61,11 @@
   <section class="info-section" id="bra-att-veta">
     <h2>Bra att veta</h2>
     {{> info-bra-att-veta}}
+  </section>
+
+  <section class="info-section" id="barn">
+    <h2>Barn</h2>
+    {{> info-barn}}
   </section>
 
   <section class="info-section" id="kontakt">
