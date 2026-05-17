@@ -7,9 +7,9 @@ const DIST = path.join(__dirname, ".dist");
 const baseUrl = (process.env.BASE_URL || "").replace(/\/$/, "");
 
 const pageMeta = {
-  index:  { title: "Bröllopsspelen",         bodyClass: "page-index" },
-  info:   { title: "Info — Bröllopsspelen",   bodyClass: "page-info"  },
-  osa:    { title: "OSA — Bröllopsspelen",    bodyClass: "page-osa"   },
+  index:  { title: "Bröllopspelen",         bodyClass: "page-index" },
+  info:   { title: "Info — Bröllopspelen",   bodyClass: "page-info"  },
+  osa:    { title: "OSA — Bröllopspelen",    bodyClass: "page-osa"   },
 };
 
 function copyDir(src, dest) {
@@ -44,7 +44,7 @@ function build() {
   for (const file of fs.readdirSync(pagesDir)) {
     if (!file.endsWith(".hbs")) continue;
     const name = path.basename(file, ".hbs");
-    const meta = pageMeta[name] || { title: "Bröllopsspelen", bodyClass: "" };
+    const meta = pageMeta[name] || { title: "Bröllopspelen", bodyClass: "" };
     const ctx = { baseUrl, ...meta };
     const pageTemplate = Handlebars.compile(
       fs.readFileSync(path.join(pagesDir, file), "utf8")
