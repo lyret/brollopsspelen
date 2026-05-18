@@ -25,19 +25,21 @@
   var attending = params.get('attendance') === 'ja';
   var plural = params.get('plural') === '1';
 
+  var din  = plural ? 'er'  : 'din';
   var du  = plural ? 'ni'  : 'du';
   var dig = plural ? 'er'  : 'dig';
 
   if (attending) {
     document.getElementById('tack-text').innerHTML =
-      'Vi ser fram emot att fira med ' + dig + '.<br>' +
+      'Vi ser fram emot att fira tillsammans.<br>' +
       'Om ' + du + ' har frågor är ' + du + ' alltid välkommen att höra av ' + dig + '.';
+    document.getElementById('tack-title').textContent = 'Tack för '+ din +' anmälan!';
   } else {
-    document.getElementById('tack-title').textContent = 'Å, det är tråkigt!';
+    document.getElementById('tack-title').textContent = 'Å, det var tråkigt!';
     document.getElementById('tack-rose').style.display = 'none';
     document.getElementById('tack-text').innerHTML =
       'Vi förstår att det inte alltid går.<br>' +
-      'Hoppas ' + du + ' har det bra och att vi ses ändå!';
+      'Hoppas ' + du + ' har det bra och att vi ses vid ett annat tillfälle.';
     document.getElementById('tack-link-info').style.display = 'none';
   }
 </script>

@@ -726,6 +726,36 @@ button[type="submit"]:hover {
 }
 
 /* ============================================================
+   Warning strip
+   ============================================================ */
+
+.warning-strip {
+	margin-bottom: var(--space-lg);
+}
+
+.warning-accordion {
+	margin: 0;
+	border-radius: 0;
+	border: 1px solid var(--border);
+	box-shadow: none;
+	background: repeating-linear-gradient(
+		-45deg,
+		var(--bg),
+		var(--bg) 14px,
+		var(--surface) 14px,
+		var(--surface) 28px
+	);
+}
+
+.warning-accordion summary {
+	font-weight: 600;
+}
+
+.warning-accordion .accordion__body {
+	background: var(--bg);
+}
+
+/* ============================================================
    Tack page
    ============================================================ */
 
