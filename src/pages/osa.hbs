@@ -1,4 +1,16 @@
-<a class="osa-back" href="{{baseUrl}}/">← Framsidan</a>
+<nav class="osa-nav" id="osa-nav">
+  <a href="#deltagare-section">Deltagare</a>
+  <a href="#narvaro-section">Närvaro</a>
+  <a href="#kontakt-section" data-section="kontakt-section">Kontakt</a>
+  <a href="#days-section" data-section="days-section">Dagar</a>
+  <a href="#accommodation-section" data-section="accommodation-section">Boende</a>
+  <a href="#kost-section" data-section="kost-section">Kost</a>
+  <a href="#more-section" data-section="more-section">Mer</a>
+  <a href="#submit-section" data-section="submit-section">Skicka</a>
+  <hr class="info-nav__rule" />
+  <a href="{{baseUrl}}/">Framsidan</a>
+  <a href="{{baseUrl}}/info">Info</a>
+</nav>
 
 <div class="osa-wrap">
   <header class="site-header">
@@ -6,8 +18,8 @@
     <h1><img class="site-logo" src="{{baseUrl}}/brollopsspelen.png" alt="Bröllopsspelen" /></h1>
     <a class="site-header__contact" href="{{baseUrl}}/info#kontakt">Kontakta oss om du undrar något.</a><br/>
     <a class="site-header__contact" href="{{baseUrl}}/info">Frågor och svar.</a>
-    <p>Fyll i formuläret nedan för att anmäla dig och ev. sällskap.<br>Vi hoppas att <span data-s="du" data-p="ni">du</span> kan komma.</p>
   </header>
+  <p class="page-subtitle">Fyll i formuläret nedan för att anmäla dig och ev. sällskap.<br>Vi hoppas att <span data-s="du" data-p="ni">du</span> kan komma.</p>
 
   {{> divider}}
 
@@ -17,19 +29,19 @@
     <input type="hidden" name="attendance" id="attendance-input" value="" />
 
     <!-- Deltagare -->
-    <div class="osa-section">
+    <div class="osa-section" id="deltagare-section">
       <p class="note">
         Ange ett namn per rad för varje person <span data-s="du" data-p="ni">du</span> anmäler.
         Anmäl även de barn <span data-s="du" data-p="ni">du</span> som följer med, skriv deras ålder efter namnet — t.ex. <em>Finn Lysvret, 1 år</em>.
       </p>
       <label for="participants">Namn - ett par rad *</label>
       <textarea id="participants" name="participants" placeholder="Kal Andersson" required rows="2"></textarea>
-      <a class="site-header__contact" href="{{baseUrl}}/info#barn">Läs om barn på bröllopet →</a>
+      <a class="site-header__contact" href="{{baseUrl}}/info#barn">Läs om barn och gäster på bröllopet →</a>
     </div>
 
     <!-- Närvaro -->
     {{> divider}}
-    <div class="osa-section">
+    <div class="osa-section" id="narvaro-section">
       <div class="attendance">
         <button type="button" class="btn-choice btn-decline" id="btn-decline" disabled>
           <span data-s="Jag" data-p="Vi">Jag</span> kan tyvärr ej närvara
@@ -58,35 +70,41 @@
     <!-- Vilka dagar -->
     <div class="osa-section form-reveal" id="days-section">
       {{> divider}}
-      <p class="section-title">Vilka dagar är <span data-s="du" data-p="ni">du</span> med?</p>
-      <p class="note">Välj alla dagar som stämmer — det hjälper oss att planera mat och aktiviteter.</p>
+      <p class="section-title">Hur länge stannar <span data-s="du" data-p="ni">du</span>?</p>
+      <p class="note">Det hjälper oss att planera mat, boende och aktiviteter.</p>
       <details class="accordion">
         <summary>Läs mer om helgens schema...</summary>
         <div class="accordion__body">
           {{> info-om-helgen}}
         </div>
       </details>
-      <label for="email">Dagar</label>
       <div class="day-choices">
         <label class="day-choice">
-          <input type="checkbox" name="days" value="fredag" />
+          <input type="radio" name="days" value="nara" required />
           <div class="day-choice__body">
-            <strong>Fredag</strong>
-            <span>Fix, förfest och grill i Småhusbyn.</span>
+            <strong>Jag bor nära / i Uddebo</strong>
+            <span>Jag behöver inget boende och är hemma på kvällen.</span>
           </div>
         </label>
         <label class="day-choice">
-          <input type="checkbox" name="days" value="lordag" checked />
+          <input type="radio" name="days" value="fre-son" />
           <div class="day-choice__body">
-            <strong>Lördag</strong>
-            <span>Lek, mingel och dans från morgon till natt <br>Vigselceremoni</span>
+            <strong>Fredag – Söndag</strong>
+            <span>Anländer på fredagen och stannar hela helgen, inklusive brunch på söndagen.</span>
           </div>
         </label>
         <label class="day-choice">
-          <input type="checkbox" name="days" value="sondag" />
+          <input type="radio" name="days" value="fre-lor" />
           <div class="day-choice__body">
-            <strong>Söndag</strong>
-            <span>Gemensam brunch på Mjällbo.</span>
+            <strong>Fredag – Lördag</strong>
+            <span>Anländer på fredagen och reser hem efter lördagen.</span>
+          </div>
+        </label>
+        <label class="day-choice">
+          <input type="radio" name="days" value="lor-son" />
+          <div class="day-choice__body">
+            <strong>Lördag – Söndag</strong>
+            <span>Anländer på lördagen och stannar till brunch på söndagen.</span>
           </div>
         </label>
       </div>
@@ -127,9 +145,12 @@
     <!-- Kost -->
     <div class="osa-section form-reveal" id="kost-section">
       {{> divider}}
-      <p class="section-title">Kost</p>
+      <p class="section-title">Matönskemål</p>
       <div class="note">
-      All mat som serveras på bröllopet kommer vara vegetarisk 🌱 men inte nödvändigtvis vegansk, anmäl gärna om du önskar detta, eller har övriga allergier / önskemål.</div>
+      All mat som serveras på bröllopet kommer vara vegetarisk 🌱 men inte nödvändigtvis vegansk, anmäl gärna om du önskar detta, eller har övriga allergier / önskemål.
+      <br/>
+      Mycket mat kommer vi lösa tillsammans via knytis.
+      </div>
       <details class="accordion">
         <summary>Läs mer om mat under helgen...</summary>
         <div class="accordion__body">
@@ -173,6 +194,7 @@
   const kostSection = document.getElementById('kost-section');
   const moreSection = document.getElementById('more-section');
   const submitSection = document.getElementById('submit-section');
+  var osaNav = document.getElementById('osa-nav');
   let participantCount = 0;
 
   const dev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
@@ -185,6 +207,7 @@
     kostSection.classList.add('is-visible');
     moreSection.classList.add('is-visible');
     submitSection.classList.add('is-visible');
+    syncOsaNav();
   }
 
   function update() {
@@ -211,12 +234,15 @@
     btnAttend.classList.toggle('is-selected', attending);
     kontaktSection.classList.toggle('is-visible', attending);
     document.getElementById('phone').required = attending;
-    document.querySelector('input[name="accommodation"]').required = attending;
     daysSection.classList.toggle('is-visible', attending);
-    accommodationSection.classList.toggle('is-visible', attending);
+    if (!attending) {
+      accommodationSection.classList.remove('is-visible');
+      document.querySelector('input[name="accommodation"]').required = false;
+    }
     kostSection.classList.toggle('is-visible', attending);
     moreSection.classList.add('is-visible');
     submitSection.classList.add('is-visible');
+    syncOsaNav();
     if (attending) {
       document.getElementById('phone').focus();
     } else {
@@ -224,16 +250,27 @@
     }
   }
 
+  function updateAccommodationVisibility() {
+    var selected = document.querySelector('input[name="days"]:checked');
+    var needsAccommodation = selected && selected.value !== 'nara';
+    accommodationSection.classList.toggle('is-visible', needsAccommodation);
+    document.querySelector('input[name="accommodation"]').required = needsAccommodation;
+    syncOsaNav();
+  }
+
   btnDecline.addEventListener('click', function() { selectAttendance('nej'); });
   btnAttend.addEventListener('click', function() { selectAttendance('ja'); });
   textarea.addEventListener('input', update);
 
+  document.querySelectorAll('input[name="days"]').forEach(function(radio) {
+    radio.addEventListener('change', updateAccommodationVisibility);
+  });
+
   document.querySelector('.osa-form').addEventListener('submit', function() {
-    var nextInput = document.querySelector('input[name="_next"]');
-    var url = new URL(nextInput.value || '/tack', window.location.href);
-    url.searchParams.set('attendance', attendanceInput.value);
+    var url = new URL('/tack', window.location.origin);
+    url.searchParams.set('attendance', attendanceInput.value === 'ja' ? 'ja' : 'nej');
     url.searchParams.set('plural', participantCount > 1 ? '1' : '0');
-    nextInput.value = url.toString();
+    document.querySelector('input[name="_next"]').value = url.toString();
   });
 
   document.querySelectorAll('textarea:not(#participants)').forEach(function(ta) {
@@ -242,4 +279,11 @@
       this.style.height = this.scrollHeight + 'px';
     });
   });
+
+  function syncOsaNav() {
+    document.querySelectorAll('.form-reveal[id]').forEach(function(section) {
+      var link = osaNav.querySelector('a[data-section="' + section.id + '"]');
+      if (link) link.classList.toggle('is-visible', section.classList.contains('is-visible'));
+    });
+  }
 </script>

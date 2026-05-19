@@ -22,19 +22,19 @@
   document.getElementById('couple-names').textContent = Math.random() < 0.5 ? 'Katrin ⚭ Viktor' : 'Viktor ⚭ Katrin';
 
   var params = new URLSearchParams(window.location.search);
-  var attending = params.get('attendance') === 'ja';
+  var attendance = params.get('attendance');
   var plural = params.get('plural') === '1';
 
-  var din  = plural ? 'er'  : 'din';
+  var din = plural ? 'er'  : 'din';
   var du  = plural ? 'ni'  : 'du';
   var dig = plural ? 'er'  : 'dig';
 
-  if (attending) {
+  if (attendance === 'ja') {
+    document.getElementById('tack-title').textContent = 'Tack för ' + din + ' anmälan!';
     document.getElementById('tack-text').innerHTML =
       'Vi ser fram emot att fira tillsammans.<br>' +
       'Om ' + du + ' har frågor är ' + du + ' alltid välkommen att höra av ' + dig + '.';
-    document.getElementById('tack-title').textContent = 'Tack för '+ din +' anmälan!';
-  } else {
+  } else if (attendance === 'nej') {
     document.getElementById('tack-title').textContent = 'Å, det var tråkigt!';
     document.getElementById('tack-rose').style.display = 'none';
     document.getElementById('tack-text').innerHTML =
