@@ -235,6 +235,7 @@
     kontaktSection.classList.toggle('is-visible', attending);
     document.getElementById('phone').required = attending;
     daysSection.classList.toggle('is-visible', attending);
+    document.querySelector('input[name="days"]').required = attending;
     if (!attending) {
       accommodationSection.classList.remove('is-visible');
       document.querySelector('input[name="accommodation"]').required = false;
