@@ -831,7 +831,7 @@ button[type="submit"]:hover {
 }
 
 /* Mobile */
-@media (max-width: 700px) {
+@media (max-width: 960px) {
 	.info-nav-toggle {
 		display: flex;
 		align-items: center;
@@ -949,7 +949,7 @@ button[type="submit"]:hover {
 	display: block;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 960px) {
 	.osa-nav {
 		position: fixed;
 		top: 0;
@@ -1081,7 +1081,7 @@ button[type="submit"]:hover {
 	padding: 0 var(--space-md) calc(var(--space-xl) * 2);
 }
 
-@media (max-width: 700px) {
+@media (max-width: 960px) {
 	body.page-info {
 		padding-top: calc(var(--space-xl) + 1rem);
 	}
