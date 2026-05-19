@@ -1,7 +1,18 @@
 <section class="hero">
   <img class="hero__bg" src="{{baseUrl}}/bg.jpg" alt="" />
+  <div class="hero__content">
+    <img class="hero__logo" src="{{baseUrl}}/brollopsspelen.png" alt="Bröllopsspelen" />
+    <p class="hero__names" id="hero-names"></p>
+    <p class="hero__date">22:a Augusti &middot; Uddebo</p>
+    <hr class="hero__rule" />
+    <p class="hero__intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra nunc at libero sodales, vitae pharetra nulla condimentum. Sed euismod nisl vel ultricies lacinia, nunc diam fermentum tortor.</p>
+  </div>
   <div class="hero__links">
     <a class="hero__btn" href="{{baseUrl}}/info">Info</a>
     <a class="hero__btn" href="{{baseUrl}}/osa">OSA</a>
   </div>
 </section>
+
+<script>
+  document.getElementById('hero-names').textContent = Math.random() < 0.5 ? 'Katrin ⚭ Viktor' : 'Viktor ⚭ Katrin';
+</script>
