@@ -62,8 +62,8 @@
         <input type="tel" id="phone" name="phone" required autocomplete="tel" />
       </div>
       <div class="field">
-        <label for="email">E-postadress</label>
-        <input type="email" id="email" name="email" autocomplete="email" />
+        <label for="email">E-postadress *</label>
+        <input type="email" id="email" name="email" required autocomplete="email" />
       </div>
     </div>
 
@@ -234,6 +234,7 @@
     btnAttend.classList.toggle('is-selected', attending);
     kontaktSection.classList.toggle('is-visible', attending);
     document.getElementById('phone').required = attending;
+    document.getElementById('email').required = attending;
     daysSection.classList.toggle('is-visible', attending);
     document.querySelector('input[name="days"]').required = attending;
     if (!attending) {
