@@ -226,7 +226,7 @@ body {
 
 .hero__names {
 	color: var(--text);
-	font-size: clamp(1.2rem, 3vw, 1.6rem);
+	font-size: clamp(1.5rem, 3vw, 1.8rem);
 	font-style: italic;
 	letter-spacing: 0.09em;
 	animation: hero-rise 3.2s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
