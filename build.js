@@ -7,10 +7,30 @@ const DIST = path.join(__dirname, ".dist");
 const baseUrl = (process.env.BASE_URL || "").replace(/\/$/, "");
 
 const pageMeta = {
-  index:  { title: "Bröllopspelen",         bodyClass: "page-index" },
-  info:   { title: "Info — Bröllopspelen",   bodyClass: "page-info"  },
-  osa:    { title: "OSA — Bröllopspelen",    bodyClass: "page-osa"   },
-  tack:   { title: "Tack! — Bröllopspelen",  bodyClass: "page-osa"   },
+  index: {
+    title:       "Bröllopsspelen",
+    bodyClass:   "page-index",
+    description: "Katrin & Viktor gifter sig den 22:a Augusti 2026 i Uddebo. Välkommen till Bröllopsspelen!",
+    ogUrl:       baseUrl + "/",
+  },
+  info: {
+    title:       "Info — Bröllopsspelen",
+    bodyClass:   "page-info",
+    description: "Information om helgen — Bröllopsspelen den 22:a Augusti 2026 i Uddebo.",
+    ogUrl:       baseUrl + "/info",
+  },
+  osa: {
+    title:       "OSA — Bröllopsspelen",
+    bodyClass:   "page-osa",
+    description: "Anmäl dig till Katrin & Viktors bröllop den 22:a Augusti 2026 i Uddebo.",
+    ogUrl:       baseUrl + "/osa",
+  },
+  tack: {
+    title:       "Tack! — Bröllopsspelen",
+    bodyClass:   "page-osa",
+    description: "Tack för din anmälan till Bröllopsspelen!",
+    ogUrl:       baseUrl + "/tack",
+  },
 };
 
 function copyDir(src, dest) {
