@@ -1,3 +1,17 @@
+<button class="info-nav-toggle" id="osa-nav-toggle" aria-label="Meny">
+  <svg class="nav-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g class="nav-hamburger">
+      <line x1="3" y1="7"  x2="21" y2="7"  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="3" y1="17" x2="21" y2="17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    <g class="nav-close">
+      <line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="19" y1="5" x2="5"  y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+  </svg>
+</button>
+
 <nav class="osa-nav" id="osa-nav">
   <a href="#deltagare-section">Deltagare</a>
   <a href="#narvaro-section">Närvaro</a>
@@ -11,6 +25,8 @@
   <a href="{{baseUrl}}/">Framsidan</a>
   <a href="{{baseUrl}}/info">Info</a>
 </nav>
+
+<div class="info-nav-backdrop" id="osa-nav-backdrop"></div>
 
 <div class="osa-wrap">
   <header class="site-header">
@@ -280,6 +296,27 @@
       this.style.height = 'auto';
       this.style.height = this.scrollHeight + 'px';
     });
+  });
+
+  var osaNavToggle = document.getElementById('osa-nav-toggle');
+  var osaNavBackdrop = document.getElementById('osa-nav-backdrop');
+
+  function closeOsaNav() {
+    osaNav.classList.remove('is-open');
+    osaNavToggle.classList.remove('is-open');
+    osaNavBackdrop.classList.remove('is-visible');
+  }
+
+  osaNavToggle.addEventListener('click', function() {
+    var open = osaNav.classList.toggle('is-open');
+    osaNavToggle.classList.toggle('is-open', open);
+    osaNavBackdrop.classList.toggle('is-visible', open);
+  });
+
+  osaNavBackdrop.addEventListener('click', closeOsaNav);
+
+  osaNav.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', closeOsaNav);
   });
 
   function syncOsaNav() {

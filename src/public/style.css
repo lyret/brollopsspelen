@@ -951,7 +951,37 @@ button[type="submit"]:hover {
 
 @media (max-width: 700px) {
 	.osa-nav {
+		position: fixed;
+		top: 0;
+		right: -100%;
+		height: 100%;
+		width: 200px;
+		background: var(--bg);
+		border-left: 1px solid var(--divider);
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		gap: 1.4rem;
+		padding: 2rem;
+		transform: none;
+		transition: right 0.25s ease;
+		z-index: 150;
+	}
+
+	.osa-nav.is-open {
+		right: 0;
+	}
+
+	.osa-nav a {
+		font-size: 0.95rem;
+	}
+
+	.osa-nav a[data-section] {
 		display: none;
+	}
+
+	.osa-nav a[data-section].is-visible {
+		display: block;
 	}
 }
 
