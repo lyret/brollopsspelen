@@ -249,6 +249,7 @@
     kontaktSection.classList.toggle('is-visible', attending);
     document.getElementById('telefon').required = attending;
     document.getElementById('epost').required = attending;
+    document.querySelector('input[name="boende"]').required = attending;
     daysSection.classList.toggle('is-visible', attending);
     accommodationSection.classList.toggle('is-visible', attending);
     kostSection.classList.toggle('is-visible', attending);
