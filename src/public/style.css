@@ -84,6 +84,11 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
+a {
+	color: var(--text);
+	text-underline-offset: 3px;
+}
+
 /* Hero */
 .hero {
 	position: relative;
@@ -1247,9 +1252,13 @@ button[type="submit"]:hover {
 	margin: var(--space-lg) 0;
 }
 
+.info-image--compact {
+	margin: var(--space-sm) 0;
+}
+
 .info-image img {
 	width: 100%;
-	height: 320px;
+	height: auto;
 	object-fit: cover;
 	object-position: center;
 	display: block;
@@ -1263,6 +1272,54 @@ button[type="submit"]:hover {
 
 	.info-dl dt {
 		margin-top: 0.75rem;
+	}
+}
+
+.info-mat__food {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--space-md);
+	margin-bottom: var(--space-sm);
+}
+
+.info-mat__food p {
+	flex: 1;
+}
+
+.info-mat__bar {
+	margin-bottom: var(--space-sm);
+}
+
+.info-mat__img {
+	width: 180px;
+	height: auto;
+	flex-shrink: 0;
+	opacity: 0.88;
+}
+
+.info-mat__img--sign {
+	display: block;
+	width: 100%;
+	margin-bottom: var(--space-sm);
+}
+
+.info-mat__section-img {
+	float: right;
+	width: 180px;
+	height: auto;
+	opacity: 0.88;
+	margin-left: var(--space-md);
+	margin-bottom: var(--space-sm);
+}
+
+.accordion__body img {
+	display: none;
+}
+
+@media (max-width: 520px) {
+	.info-mat__food {
+		flex-direction: column-reverse;
+		align-items: center;
 	}
 }
 
@@ -1293,3 +1350,57 @@ button[type="submit"]:hover {
 		width: 100px;
 	}
 }
+
+.info-boende__img {
+	float: right;
+	width: 180px;
+	height: auto;
+	opacity: 0.88;
+	margin-left: var(--space-md);
+	margin-bottom: var(--space-sm);
+}
+
+.info-kladsel__forslag {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--space-md);
+	margin-bottom: var(--space-sm);
+}
+
+.info-kladsel__forslag > div {
+	flex: 1;
+}
+
+.info-kladsel__img {
+	width: 90px;
+	height: auto;
+	flex-shrink: 0;
+	opacity: 0.88;
+}
+
+.info-helgen__flags {
+	float: right;
+	width: 55%;
+	height: auto;
+	opacity: 0.88;
+	margin-left: var(--space-md);
+	margin-bottom: var(--space-sm);
+}
+
+.info-resa__kollektivt {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--space-md);
+}
+
+.info-resa__kollektivt > div {
+	flex: 1;
+}
+
+.info-resa__img {
+	width: 90px;
+	height: auto;
+	flex-shrink: 0;
+	opacity: 0.88;
+}
+
