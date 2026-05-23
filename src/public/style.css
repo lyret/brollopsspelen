@@ -830,6 +830,14 @@ button[type="submit"]:hover {
 	margin-top: 0;
 }
 
+.accordion__body h3 {
+	font-size: 1.2rem;
+	font-weight: 500;
+	color: var(--text);
+	margin-top: var(--space-sm);
+	margin-bottom: 0.25rem;
+}
+
 /* ============================================================
    Hero — two buttons
    ============================================================ */
