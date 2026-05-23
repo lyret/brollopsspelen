@@ -89,6 +89,8 @@ body {
 	position: relative;
 	width: 100%;
 	height: 100vh;
+	height: 100dvh;
+	overflow: hidden;
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
@@ -139,6 +141,9 @@ body {
 	text-align: center;
 	max-width: 520px;
 	padding: var(--space-sm) var(--space-md) var(--space-lg);
+	text-shadow:
+		0 1px 6px rgba(247, 244, 239, 0.6),
+		0 0 12px rgba(247, 244, 239, 0.4);
 }
 
 .hero__content::before,
@@ -152,14 +157,14 @@ body {
 }
 
 .hero__content::before {
-	inset: -30px -40px;
-	background: radial-gradient(ellipse at center, rgba(225, 227, 222, 0.92) 0%, rgba(225, 227, 222, 0) 100%);
+	inset: -30px -40px -60px;
+	background: radial-gradient(ellipse at center, rgba(225, 227, 222, 0.82) 0%, rgba(225, 227, 222, 0) 100%);
 	animation: blob-a 42s ease-in-out infinite;
 }
 
 .hero__content::after {
-	inset: -15px -25px;
-	background: radial-gradient(ellipse at center, rgba(210, 205, 192, 0.82) 0%, rgba(210, 205, 192, 0) 100%);
+	inset: -15px -25px -50px;
+	background: radial-gradient(ellipse at center, rgba(210, 205, 192, 0.62) 0%, rgba(210, 205, 192, 0) 100%);
 	animation: blob-b 30s ease-in-out infinite;
 }
 
@@ -257,7 +262,9 @@ body {
 }
 
 .hero__btn {
-	display: block;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	flex: 1;
 	padding: 0.85rem 1rem;
 	color: var(--text);
@@ -351,7 +358,7 @@ body.page-osa {
 	display: inline-block;
 	margin-top: 0.45rem;
 	margin-bottom: 0.45rem;
-	font-size: 1.1rem;
+	font-size: 1.2rem;
 	letter-spacing: 0.04em;
 	color: var(--text-dim);
 	text-decoration: underline;
@@ -393,6 +400,15 @@ body.page-osa {
 	width: 100%;
 	color: var(--input-border);
 	margin: var(--space-lg) 0;
+}
+
+body.page-osa .divider {
+	color: #7a9e80;
+	transition: color 0.3s;
+}
+
+body.attendance-declined .divider {
+	color: #b03030;
 }
 
 .osa-section {
@@ -804,7 +820,7 @@ button[type="submit"]:hover {
 .accordion__body {
 	padding: var(--space-sm) var(--space-md) var(--space-md);
 	border-top: 1px solid var(--divider);
-	font-size: 1.1rem;
+	font-size: 1.2rem;
 	line-height: 1.75;
 }
 
@@ -1152,9 +1168,27 @@ button[type="submit"]:hover {
 	margin-bottom: var(--space-sm);
 }
 
+.info-section h3 {
+	font-size: 1.15rem;
+	font-weight: 500;
+	color: var(--text);
+	margin-top: var(--space-sm);
+	margin-bottom: 0.4rem;
+}
+
+.info-section h4 {
+	font-size: 1rem;
+	font-weight: 500;
+	color: var(--text-dim);
+	letter-spacing: 0.04em;
+	margin-top: var(--space-sm);
+	margin-bottom: 0.3rem;
+}
+
 .info-section p {
-	font-size: 1.05rem;
+	font-size: 1.2rem;
 	line-height: 1.75;
+	color: var(--text-label);
 }
 
 .info-address {
@@ -1162,15 +1196,15 @@ button[type="submit"]:hover {
 	display: flex;
 	flex-direction: column;
 	gap: 0.15rem;
-	font-size: 1.05rem;
-	line-height: 1.7;
+	font-size: 1.2rem;
+	line-height: 1.75;
 }
 
 .info-address a {
 	margin-top: 0.4rem;
 	color: var(--text);
-	font-size: 0.85rem;
-	letter-spacing: 0.06em;
+	font-size: 1.1rem;
+	letter-spacing: 0.04em;
 }
 
 .info-list {
@@ -1179,7 +1213,7 @@ button[type="submit"]:hover {
 	display: flex;
 	flex-direction: column;
 	gap: 0.4rem;
-	font-size: 1.05rem;
+	font-size: 1.2rem;
 	line-height: 1.75;
 }
 
@@ -1192,8 +1226,8 @@ button[type="submit"]:hover {
 	display: grid;
 	grid-template-columns: 8rem 1fr;
 	gap: 0.5rem 1rem;
-	font-size: 1.05rem;
-	line-height: 1.7;
+	font-size: 1.2rem;
+	line-height: 1.75;
 }
 
 .info-dl dt {
@@ -1221,5 +1255,33 @@ button[type="submit"]:hover {
 
 	.info-dl dt {
 		margin-top: 0.75rem;
+	}
+}
+
+.info-barn-och-sallskap {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--space-md);
+}
+
+.info-barn-och-sallskap p {
+	flex: 1;
+}
+
+.info-barn-och-sallskap__img {
+	width: 130px;
+	height: auto;
+	flex-shrink: 0;
+	opacity: 0.85;
+}
+
+@media (max-width: 520px) {
+	.info-barn-och-sallskap {
+		flex-direction: column-reverse;
+		align-items: center;
+	}
+
+	.info-barn-och-sallskap__img {
+		width: 100px;
 	}
 }

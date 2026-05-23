@@ -42,17 +42,17 @@
   <form class="osa-form" action="https://formspree.io/f/xeenydqz" method="POST">
     <input type="hidden" name="_subject" value="OSA — Bröllopsspelen" />
     <input type="hidden" name="_next" value="{{baseUrl}}/tack" />
-    <input type="hidden" name="attendance" id="attendance-input" value="" />
+    <input type="hidden" name="narvaro" id="attendance-input" value="" />
 
     <!-- Deltagare -->
     <div class="osa-section" id="deltagare-section">
       <p class="note">
-        Ange ett namn per rad för varje person <span data-s="du" data-p="ni">du</span> anmäler.
-        Anmäl även de barn <span data-s="du" data-p="ni">du</span> som följer med, skriv deras ålder efter namnet — t.ex. <em>Finn Lysvret, 1 år</em>.
+        Ange namnen för varje person <span data-s="du" data-p="ni">du</span> anmäler.
+        Anmäl även namn och ålder på de barn som följer med <span data-s="dig" data-p="er">dig</span>, t.ex. <em>Finn Lysvret, 1 år</em>.
       </p>
-      <label for="participants">Namn - ett par rad *</label>
-      <textarea id="participants" name="participants" placeholder="Kal Andersson" required rows="2"></textarea>
-      <a class="site-header__contact" href="{{baseUrl}}/info#barn">Läs om barn och gäster på bröllopet →</a>
+      <label for="deltagare">Ett namn per rad *</label>
+      <textarea id="deltagare" name="deltagare" placeholder="Kal Andersson" required rows="2"></textarea>
+      <a class="site-header__contact" href="{{baseUrl}}/info#barn-sallskap">Läs om barn och sällskap (+1)</a>
     </div>
 
     <!-- Närvaro -->
@@ -74,20 +74,22 @@
       <p class="section-title">Kontaktinformation</p>
       <p class="note">Ange kontaktuppgifter till <span data-s="dig" data-p="en av er">dig</span> så att vi kan nå <span data-s="dig" data-p="er">dig</span> vid behov.</p>
       <div class="field">
-        <label for="phone">Telefonnummer *</label>
-        <input type="tel" id="phone" name="phone" required autocomplete="tel" />
+        <label for="telefon">Telefonnummer *</label>
+        <input type="tel" id="telefon" name="telefon" required autocomplete="tel" />
       </div>
       <div class="field">
-        <label for="email">E-postadress *</label>
-        <input type="email" id="email" name="email" required autocomplete="email" />
+        <label for="epost">E-postadress *</label>
+        <input type="email" id="epost" name="epost" required autocomplete="email" />
       </div>
     </div>
 
     <!-- Vilka dagar -->
     <div class="osa-section form-reveal" id="days-section">
       {{> divider}}
-      <p class="section-title">Hur länge stannar <span data-s="du" data-p="ni">du</span>?</p>
-      <p class="note">Det hjälper oss att planera mat, boende och aktiviteter.</p>
+      <p class="section-title">Vilka dagar delar <span data-s="du" data-p="ni">du</span> med oss?</p>
+      <p class="note">
+      	Själva vigseln och <i>Bröllopsspelen</i> är under lördagen. Men vill vill gärna fira tillsammans hela helgen och välkomnar <span data-s="dig" data-p="er">dig</span> att vara med både fredag och söndag.<br>Även om det kan vara svårt att veta så här tidigt så hjälper det oss att planera på ett ungefär så höfta gärna till det, det går bra att ändra sig.
+      </p>
       <details class="accordion">
         <summary>Läs mer om helgens schema...</summary>
         <div class="accordion__body">
@@ -95,32 +97,23 @@
         </div>
       </details>
       <div class="day-choices">
+      	<label>Välj dagar</label>
         <label class="day-choice">
-          <input type="radio" name="days" value="nara" required />
+          <input type="checkbox" name="dagar" value="fredag" />
           <div class="day-choice__body">
-            <strong>Jag bor nära / i Uddebo</strong>
-            <span>Jag behöver inget boende och är hemma på kvällen.</span>
+            <strong>Fredag - 21 augusti</strong>
           </div>
         </label>
         <label class="day-choice">
-          <input type="radio" name="days" value="fre-son" />
+          <input type="checkbox" name="dagar" value="lordag" checked />
           <div class="day-choice__body">
-            <strong>Fredag – Söndag</strong>
-            <span>Anländer på fredagen och stannar hela helgen, inklusive brunch på söndagen.</span>
+            <strong>Lördag - 22 augusti</strong>
           </div>
         </label>
         <label class="day-choice">
-          <input type="radio" name="days" value="fre-lor" />
+          <input type="checkbox" name="dagar" value="sondag" />
           <div class="day-choice__body">
-            <strong>Fredag – Lördag</strong>
-            <span>Anländer på fredagen och reser hem efter lördagen.</span>
-          </div>
-        </label>
-        <label class="day-choice">
-          <input type="radio" name="days" value="lor-son" />
-          <div class="day-choice__body">
-            <strong>Lördag – Söndag</strong>
-            <span>Anländer på lördagen och stannar till brunch på söndagen.</span>
+            <strong>Söndag - 23 augusti</strong>
           </div>
         </label>
       </div>
@@ -131,29 +124,34 @@
       {{> divider}}
       <p class="section-title">Boende</p>
       <div class="note">
-      För er som kommer långvägars finns det flera alternativ att välja på som du kan läsa mer om här på sidan, vi hjälper gärna till med boendet om Hur ordnar <span data-s="du" data-p="ni">du</span> önskar detta.
+      För er som har en bit att resa finns det flera alternativ för övernattning att välja på. Vi hjälper gärna till att ordna boende om <span data-s="du" data-p="ni">du</span> önskar detta.
     </div>
       <details class="accordion">
         <summary>Läs mer om boendealternativ</summary>
         <div class="accordion__body">
-          <p>Vi har några alternativ för boende under bröllopshelgen, bland annat en härlig plats att tälta på, några vandrarhemsplatser reserverade och det finns flera hotell i Tranemo.</p>
-          <p>Vänner och bekanta i byn ställer också gärna upp med sovplats.</p>
           {{> info-boende}}
         </div>
       </details>
       <label>Hur ordnar <span data-s="du" data-p="ni">du</span> boendet?</label>
       <div class="radio-choices">
         <label class="radio-choice">
-          <input type="radio" name="accommodation" value="sjalv" required />
+          <input type="radio" name="boende" value="sjalv" required />
           <span><span data-s="Jag" data-p="Vi">Jag</span> löser boendet själv</span>
         </label>
         <label class="radio-choice">
-          <input type="radio" name="accommodation" value="talt" />
+          <input type="radio" name="boende" value="talt" />
           <span><span data-s="Jag" data-p="Vi">Jag</span>  kommer tälta på Mjällbo</span>
         </label>
         <label class="radio-choice">
-          <input type="radio" name="accommodation" value="hjalp" />
+          <input type="radio" name="boende" value="hjalp" />
           <span><span data-s="Jag" data-p="Vi">Jag</span>  önskar hjälp att ordna boende</span>
+        </label>
+      </div>
+      <label>Pssst</label>
+      <div class="day-choices">
+        <label class="day-choice">
+          <input type="checkbox" name="erbjuder-boende" value="ja" />
+          <span><span data-s="Jag" data-p="Vi">Jag</span> kan erbjuda boende till andra gäster</span>
         </label>
       </div>
     </div>
@@ -163,19 +161,18 @@
       {{> divider}}
       <p class="section-title">Matönskemål</p>
       <div class="note">
-      All mat som serveras på bröllopet kommer vara vegetarisk 🌱 men inte nödvändigtvis vegansk, anmäl gärna om du önskar detta, eller har övriga allergier / önskemål.
-      <br/>
-      Mycket mat kommer vi lösa tillsammans via knytis.
+      Mat under helgen kommer vi till viss del lösa tillsammans med knytis, och en viss del bjuder vi på.
+      <br><br> All mat under helgen kommer vara vegetarisk 🌱, men inte nödvändigtvis vegansk, så anmäl gärna om <span data-s="du" data-p="ni">du</span> önskar detta, samt <span data-s="dina" data-p="era">dina</span> övriga allergier och önskemål gällande mat.
       </div>
       <details class="accordion">
         <summary>Läs mer om mat under helgen...</summary>
         <div class="accordion__body">
-          <p>All mat som serveras på bröllopet kommer vara vegetarisk 🌱 men inte nödvändigtvis vegansk, anmäl gärna om <span data-s="du" data-p="ni">du</span> önskar.</p>
+          {{> info-mat}}
         </div>
       </details>
       <div class="field">
-        <label for="dietary">Allergier eller kostpreferenser</label>
-        <textarea id="dietary" name="dietary" placeholder="T.ex. glutenintolerans, veganskt…" rows="2"></textarea>
+        <label for="matonskemal">Allergier eller önskemål</label>
+        <textarea id="matonskemal" name="matonskemal" placeholder="T.ex. glutenintolerans, veganskt…" rows="2"></textarea>
       </div>
     </div>
 
@@ -184,7 +181,7 @@
       {{> divider}}
       <p class="section-title">Något mer <span data-s="du" data-p="ni">du</span> vill att vi ska veta?</p>
       <div class="field">
-        <textarea name="more" placeholder="Skriv gärna vad som helst…" rows="2"></textarea>
+        <textarea name="ovrigt" placeholder="Skriv gärna vad som helst…" rows="2"></textarea>
       </div>
     </div>
 
@@ -200,7 +197,7 @@
 <script>
   document.getElementById('couple-names').textContent = Math.random() < 0.5 ? 'Katrin ⚭ Viktor' : 'Viktor ⚭ Katrin';
 
-  const textarea = document.getElementById('participants');
+  const textarea = document.getElementById('deltagare');
   const attendanceInput = document.getElementById('attendance-input');
   const btnDecline = document.getElementById('btn-decline');
   const btnAttend = document.getElementById('btn-attend');
@@ -248,41 +245,26 @@
     const attending = value === 'ja';
     btnDecline.classList.toggle('is-selected', !attending);
     btnAttend.classList.toggle('is-selected', attending);
+    document.body.classList.toggle('attendance-declined', !attending);
     kontaktSection.classList.toggle('is-visible', attending);
-    document.getElementById('phone').required = attending;
-    document.getElementById('email').required = attending;
+    document.getElementById('telefon').required = attending;
+    document.getElementById('epost').required = attending;
     daysSection.classList.toggle('is-visible', attending);
-    document.querySelector('input[name="days"]').required = attending;
-    if (!attending) {
-      accommodationSection.classList.remove('is-visible');
-      document.querySelector('input[name="accommodation"]').required = false;
-    }
+    accommodationSection.classList.toggle('is-visible', attending);
     kostSection.classList.toggle('is-visible', attending);
     moreSection.classList.add('is-visible');
     submitSection.classList.add('is-visible');
     syncOsaNav();
     if (attending) {
-      document.getElementById('phone').focus();
+      document.getElementById('telefon').focus();
     } else {
       moreSection.querySelector('textarea').focus();
     }
   }
 
-  function updateAccommodationVisibility() {
-    var selected = document.querySelector('input[name="days"]:checked');
-    var needsAccommodation = selected && selected.value !== 'nara';
-    accommodationSection.classList.toggle('is-visible', needsAccommodation);
-    document.querySelector('input[name="accommodation"]').required = needsAccommodation;
-    syncOsaNav();
-  }
-
   btnDecline.addEventListener('click', function() { selectAttendance('nej'); });
   btnAttend.addEventListener('click', function() { selectAttendance('ja'); });
   textarea.addEventListener('input', update);
-
-  document.querySelectorAll('input[name="days"]').forEach(function(radio) {
-    radio.addEventListener('change', updateAccommodationVisibility);
-  });
 
   document.querySelector('.osa-form').addEventListener('submit', function() {
     var url = new URL('/tack', window.location.origin);
@@ -291,7 +273,7 @@
     document.querySelector('input[name="_next"]').value = url.toString();
   });
 
-  document.querySelectorAll('textarea:not(#participants)').forEach(function(ta) {
+  document.querySelectorAll('textarea:not(#deltagare)').forEach(function(ta) {
     ta.addEventListener('input', function() {
       this.style.height = 'auto';
       this.style.height = this.scrollHeight + 'px';

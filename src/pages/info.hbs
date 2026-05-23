@@ -13,12 +13,14 @@
 </button>
 
 <nav class="info-nav" id="info-nav">
+  <a href="#om-helgen">Om helgen</a>
   <a href="#valkomst">Välkommen</a>
   <a href="#vigsel">Vigsel</a>
   <a href="#middag">Middag & Fest</a>
   <a href="#boende">Boende</a>
   <a href="#bra-att-veta">Bra att veta</a>
-  <a href="#barn">Barn</a>
+  <a href="#kost">Mat</a>
+  <a href="#barn-sallskap">Barn</a>
   <a href="#kontakt">Kontakt</a>
   <hr class="info-nav__rule" />
   <a href="{{baseUrl}}/">Framsidan</a>
@@ -34,7 +36,6 @@
     <h1><img class="site-logo" src="{{baseUrl}}/brollopsspelen.png" alt="Bröllopsspelen" /></h1>
   </header>
   <p class="page-subtitle">Information inför bröllopet</p>
-  <p class="page-intro">{{> intro-text}}</p>
 
   <div class="warning-strip">
     <details class="accordion warning-accordion">
@@ -46,38 +47,55 @@
     </details>
   </div>
 
-  <section class="info-section" id="valkomst">
-    <h2>Välkommen</h2>
-    {{> info-valkomst}}
+
+<section class="info-section" id="om-brollopsspelen">
+<p>
+  Vi är så glada att du vill komma och fira med oss.
+  Här hittar du all information du behöver inför helgen...
+  <br/>
+  <br/>
+</p>
+  <h2>Ett lite annorlunda bröllop</h2>
+  {{> info-om-brollopsspelen}}
+</section>
+
+<section class="info-section" id="platsen">
+	<h2>Mjällbo gård</h2>
+	{{> info-platsen}}
+</section>
+
+<section class="info-section" id="om-helgen">
+	<h2>Om helgen</h2>
+    {{> info-om-helgen}}
+</section>
+
+
+
+  <section class="info-section" id="kladsel">
+    <h2>Klädsel och förberedelser</h2>
+    {{> info-kladsel-och-forberedelser}}
   </section>
 
-  <section class="info-section" id="vigsel">
-    <h2>Vigsel</h2>
-    {{> info-vigsel}}
+  <section class="info-section" id="mat">
+    <h2>Mat</h2>
+    {{> info-mat}}
   </section>
-
-  <section class="info-section" id="middag">
-    <h2>Middag & Fest</h2>
-    {{> info-middag}}
-  </section>
-
-  <div class="info-image">
-    <img src="{{baseUrl}}/bg.jpg" alt="Platsen" />
-  </div>
 
   <section class="info-section" id="boende">
     <h2>Boende</h2>
     {{> info-boende}}
   </section>
 
-  <section class="info-section" id="bra-att-veta">
-    <h2>Bra att veta</h2>
-    {{> info-bra-att-veta}}
+  <section class="info-section" id="resa">
+    <h2>Resa och parkering</h2>
+    {{> info-resa}}
   </section>
 
-  <section class="info-section" id="barn">
-    <h2>Barn</h2>
-    {{> info-barn}}
+
+
+  <section class="info-section" id="barn-sallskap">
+    <h2>Om barn och sällskap (+1)</h2>
+    {{> info-barn-och-sallskap}}
   </section>
 
   <section class="info-section" id="kontakt">
