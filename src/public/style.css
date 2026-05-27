@@ -93,8 +93,8 @@ a {
 .hero {
 	position: relative;
 	width: 100%;
-	min-height: 100dvh;
-	overflow: visible;
+	height: 100dvh;
+	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -104,9 +104,6 @@ a {
 
 @media (min-width: 701px) {
 	.hero {
-		height: 100dvh;
-		min-height: unset;
-		overflow: hidden;
 		flex-direction: row;
 		align-items: flex-start;
 		justify-content: flex-end;
@@ -118,7 +115,7 @@ a {
 		bottom: var(--space-lg);
 		left: var(--space-lg);
 		right: auto;
-		width: 28rem;
+		width: fit-content;
 	}
 
 	.hero__content::before {
@@ -148,13 +145,41 @@ a {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: var(--space-md);
-	text-align: center;
 	max-width: 520px;
-	padding: var(--space-sm) var(--space-md) var(--space-lg);
 	text-shadow:
 		0 1px 6px rgba(247, 244, 239, 0.6),
 		0 0 12px rgba(247, 244, 239, 0.4);
+	/* mobile: grow to fill space so blur covers the area */
+	flex: 1 1 0;
+	min-height: 0;
+	overflow: visible;
+}
+
+.hero__scroll {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-md);
+	text-align: center;
+	padding: var(--space-sm) var(--space-md) var(--space-lg);
+	width: 100%;
+	/* mobile: this inner wrapper scrolls, not the blur container */
+	flex: 1 1 0;
+	min-height: 0;
+	overflow-y: auto;
+}
+
+@media (min-width: 701px) {
+	.hero__content {
+		flex: none;
+		min-height: auto;
+	}
+
+	.hero__scroll {
+		flex: none;
+		min-height: auto;
+		overflow-y: visible;
+	}
 }
 
 .hero__content::before,
@@ -854,14 +879,19 @@ button[type="submit"]:hover {
    ============================================================ */
 
 .hero__links {
-	position: static;
-	width: calc(100% - var(--space-md) * 2);
-	margin: var(--space-md) var(--space-md) calc(var(--space-lg) + env(safe-area-inset-bottom, 0px));
 	z-index: 1;
 	display: flex;
 	flex-direction: row;
 	gap: var(--space-sm);
 	animation: hero-rise 3.2s cubic-bezier(0.16, 1, 0.3, 1) 0.62s both;
+}
+
+@media (max-width: 700px) {
+	.hero__links {
+		flex-shrink: 0;
+		width: calc(100% - var(--space-md) * 2);
+		margin: 0 var(--space-md) calc(var(--space-md) + env(safe-area-inset-bottom, 0px));
+	}
 }
 
 /* ============================================================
