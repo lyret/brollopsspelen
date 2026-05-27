@@ -118,6 +118,7 @@ a {
 		width: fit-content;
 	}
 
+
 	.hero__content::before {
 		inset: -25vh -80vw -80px -120px;
 		filter: blur(40px);
@@ -319,6 +320,14 @@ a {
 
 .hero__btn:hover {
 	opacity: 0.8;
+}
+
+@media (min-width: 701px) {
+	.hero__btn {
+		flex: none;
+		padding-left: 2.4rem;
+		padding-right: 2.4rem;
+	}
 }
 
 @keyframes hero-rise {
